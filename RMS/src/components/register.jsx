@@ -45,7 +45,7 @@ export default function Register() {
 
       if (token) {
         const decodeToken = jwtDecode(token);
-        const tokenDetails = JSON.stringify(decodeToken);
+        // const tokenDetails = JSON.stringify(decodeToken);
         const role = decodeToken.role.toLowerCase();
         navigate(`/api/${role}`, { replace: true });
       }
@@ -54,14 +54,6 @@ export default function Register() {
         icon: "success",
         title: "Success!",
         text: "Account created successfully.",
-      });
-      setFormData({
-        firstName: "",
-        lastName: "",
-        username: "",
-        password: "",
-        role: "",
-        position: "",
       });
     } catch (error) {
       console.error("Error:", error);

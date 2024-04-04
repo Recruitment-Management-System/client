@@ -1,23 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (
-    <div className='h-screen overflow-hidden'>
-      <div className='bg-[#222831] text-3xl text-white text-center py-5 font-bold'>Recruitment Management System</div>
-      <div className='h-full overflow-hidden'>
-        <div className='h-full flex justify-center items-center gap-10'>
-          <button className='cursor-pointer'>
-             <Link to={"/api/login"} className='text-white rounded-sm text-2xl px-10 py-3 bg-[#222831]'>Login</Link>
-          </button>
-          <button className='cursor-pointer'>
-             <Link to={"/api/register"} className='text-white rounded-sm text-2xl px-10 py-3 bg-[#222831]'>Register</Link>
-          </button>
+    <div className="h-screen overflow-hidden flex w-full">
+      <div className="w-1/6 bg-[#222831]">
+        <Navbar />
+      </div>
+      <div
+        className="w-5/6"
+        style={{
+          backgroundImage: `url('/src/assets/bgimg.jpg')`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="h-full overflow-hidden">
+          <h1 className=" text-5xl font-bold text-center pt-10">
+            Recruit Management System
+          </h1>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
-
+export default Home;

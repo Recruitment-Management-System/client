@@ -53,10 +53,6 @@ export default function Example() {
         text: "Loggin sucessfull!",
         showConfirmButton: false,
       });
-      setFormData({
-        username: "",
-        password: "",
-      });
     } catch (error) {
       console.error("Error:", error);
       Swal.fire({
