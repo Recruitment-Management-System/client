@@ -65,3 +65,27 @@ function App() {
 }
 
 export default App;
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import './index.css'
+import Register from './components/register';
+import Example from './components/login';
+import AddFeedback from './pages/feedback/AddFeedback';
+import ViewFeedback from './pages/feedback/ViewFeedback';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Example />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route path = "/savefeedback" element={<AddFeedback/>}/>
+        <Route path = "/viewfeedback" element={<ViewFeedback/>}/>
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
