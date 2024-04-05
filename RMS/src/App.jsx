@@ -12,10 +12,14 @@ import ProjectManager from "./pages/ProjectManager";
 import CreateVacancy from './modules/addVacancy';
 import UpdateVacancy from './modules/updatevacancy';
 import Project from './modules/projects';
+import VacancyTable from "./modules/vacancyProject";
 import axios from "axios";
+import AddCandidate from "./modules/addCandidate";
+import Vacancy from "./modules/vacancy";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
+
 function App() {
 
   useEffect(()=>{
@@ -43,8 +47,12 @@ function App() {
 
        
         <Route path="/create-vacancy/:projectID" element={<CreateVacancy />}/>
-        <Route path="/update-vacancy" element={<UpdateVacancy />} />
+        <Route path="/update-vacancy/:vacancyID" element={<UpdateVacancy />} />
         <Route path="/projects" element={<Project />} />
+        <Route path="/projects/:projectId" element={<VacancyTable />}/>
+
+        <Route path="/candidate" element={<AddCandidate />} />
+        <Route path="/vacancies" element={<Vacancy />} />
 
       </Routes>
     </Router>
