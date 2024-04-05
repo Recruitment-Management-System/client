@@ -72,7 +72,7 @@ import './index.css'
 import Register from './components/register';
 import Example from './components/login';
 import AddFeedback from './pages/feedback/AddFeedback';
-import ViewFeedback from './pages/feedback/ViewFeedback';
+import ViewFeedbackPM from './pages/feedback/ViewFeedbackPM';
 
 function App() {
   return (
@@ -82,7 +82,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path = "/savefeedback" element={<AddFeedback/>}/>
-        <Route path = "/viewfeedback" element={<ViewFeedback/>}/>
+        <Route path = "/viewfeedbackpm" element={<ViewFeedbackPM/>}/>
       </Routes>
     </Router>
   );
