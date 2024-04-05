@@ -8,6 +8,7 @@ export default function CreateVacancy(props) {
     const navigate = useNavigate();
   
 
+
   const [formData, setFormData] = useState({
     jobRole: "",
     jobRefCode: "",
@@ -24,10 +25,12 @@ export default function CreateVacancy(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+
       await axios.post(`/vacancies/${projectID}/add`, formData);
      // alert('Vacancy created successfully!');
       // Redirect to project page or any other page after successful submission
       navigate(`/projects/${projectID}`);
+
     } catch (error) {
       console.error('Error creating vacancy:', error);
       alert('Failed to create vacancy. Please try again later.');
@@ -36,7 +39,9 @@ export default function CreateVacancy(props) {
 
   return (
     <div className="bg-background min-h-screen flex flex-col justify-center items-center">
+
       {/* <img src={logo} alt="Logo" className="h-10 w-auto mb-4" /> */}
+
       <h2 className="text-2xl font-bold leading-9 tracking-tight text-white mb-8">Create a vacancy</h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div>
@@ -88,19 +93,25 @@ export default function CreateVacancy(props) {
           <label htmlFor="status" className="block text-sm font-medium leading-6 text-white">
             Status
           </label>
+
           <select
             id="status"
             name="status"
+
             required
             value={formData.status}
             onChange={handleChange}
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+
           >
             <option value="">Select Status</option>
             <option value="OPEN">OPEN</option>
             <option value="CLOSED">CLOSED</option>
             <option value="IN_PROGRESS">IN_PROGRESS</option>
           </select>
+
+        
+
         </div>
         <div>
           <label htmlFor="reason" className="block text-sm font-medium leading-6 text-white">

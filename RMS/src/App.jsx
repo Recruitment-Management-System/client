@@ -1,5 +1,7 @@
 
+
 import React, { useEffect } from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/login";
 import "./index.css";
@@ -9,6 +11,7 @@ import Admin from "./pages/Admin";
 import Interviewer from "./pages/Interviewer";
 import HrPerson from "./pages/HrPerson";
 import ProjectManager from "./pages/ProjectManager";
+
 import CreateVacancy from './modules/addVacancy';
 import UpdateVacancy from './modules/updatevacancy';
 import Project from './modules/projects';
@@ -19,6 +22,7 @@ import Vacancy from "./modules/vacancy";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 // axios.defaults.withCredentials = true;
+
 
 function App() {
 
@@ -53,6 +57,7 @@ function App() {
 
         <Route path="/candidate" element={<AddCandidate />} />
         <Route path="/vacancies" element={<Vacancy />} />
+
 
       </Routes>
     </Router>

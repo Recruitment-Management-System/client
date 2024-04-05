@@ -53,6 +53,7 @@ export default function Example() {
         text: "Loggin sucessfull!",
         showConfirmButton: false,
       });
+
     } catch (error) {
       console.error("Error:", error);
       Swal.fire({
