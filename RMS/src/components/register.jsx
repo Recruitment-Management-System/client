@@ -38,9 +38,7 @@ export default function Register() {
         formData
       );
       console.log("Response from backend:", response.data);
-
       const { token } = response.data;
-
       localStorage.setItem("token", token);
 
       if (token) {

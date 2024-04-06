@@ -1,47 +1,39 @@
+import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import React from "react";
 import AdminNavbar from "./AdminNavbar";
 import InterviewerNavbar from "./InterviewerNavbar";
 import PmNavbar from "./PmNavbar";
 import HrNavbar from "./HrNavbar";
-import Logout from "./Logout";
-import { Link } from "react-router-dom";
 import UserNavbar from "./UserNavbar";
 
 const Navbar = () => {
+  const [navbarComponent, setNavbarComponent] = useState(<UserNavbar />);
   const token = localStorage.getItem("token");
-  let navbarComponent = <UserNavbar />;
+  useEffect(() => {
+    if (token) {
+      const decodeToken = jwtDecode(token);
+      const role = decodeToken.role;
 
-  if (token) {
-    const decodeToken = jwtDecode(token);
-    const role = decodeToken.role;
-
-    switch (role) {
-      case "ADMIN":
-        navbarComponent = <AdminNavbar />;
-        break;
-      case "INTERVIEWER":
-        navbarComponent = <InterviewerNavbar />;
-        break;
-      case "PROJECT_MANAGER":
-        navbarComponent = <PmNavbar />;
-        break;
-      case "HR_PERSON":
-        navbarComponent = <HrNavbar />;
-        break;
-
-      default:
-        break;
+      switch (role) {
+        case "ADMIN":
+          setNavbarComponent(<AdminNavbar />);
+          break;
+        case "INTERVIEWER":
+          setNavbarComponent(<InterviewerNavbar />);
+          break;
+        case "PROJECT_MANAGER":
+          setNavbarComponent(<PmNavbar />);
+          break;
+        case "HR_PERSON":
+          setNavbarComponent(<HrNavbar />);
+          break;
+        default:
+          break;
+      }
     }
-  }
-  return (
-    <div className="text-white font-bold">
-      {navbarComponent}
-      <div className="absolute bottom-5 left-5">
-        <Link to={"/"}>Logout</Link>
-      </div>
-    </div>
-  );
+  }, [token]);
+
+  return <div className="text-white font-bold">{navbarComponent}</div>;
 };
 
 export default Navbar;

@@ -1,20 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (
     <div className="h-screen overflow-hidden flex w-full">
-      <div className="w-1/6 bg-[#222831]">
-        <Navbar />
-      </div>
       <div
-        className="w-5/6"
+        className="w-full"
         style={{
           backgroundImage: `url('/src/assets/bgimg.jpg')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
+          // backgroundPosition: "center",
         }}
       >
         <div className="h-full overflow-hidden">
