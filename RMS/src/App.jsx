@@ -1,5 +1,5 @@
 
-
+import axios from "axios";
 import React, { useEffect } from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,13 +12,17 @@ import Interviewer from "./pages/Interviewer";
 import HrPerson from "./pages/HrPerson";
 import ProjectManager from "./pages/ProjectManager";
 
-import CreateVacancy from './modules/addVacancy';
-import UpdateVacancy from './modules/updatevacancy';
-import Project from './modules/projects';
-import VacancyTable from "./modules/vacancyProject";
-import axios from "axios";
-import AddCandidate from "./modules/addCandidate";
-import Vacancy from "./modules/vacancy";
+import CreateVacancy from './components/addVacancy';
+import UpdateVacancy from './components/updatevacancy';
+import Project from './components/projects';
+import VacancyTable from "./components/vacancyProject";
+
+import AddCandidate from "./components/addCandidate";
+import Vacancy from "./components/vacancy";
+
+import AddFeedback from './pages/feedback/AddFeedback';
+import ViewFeedbackPM from './pages/feedback/ViewFeedbackPM';
+import ViewFeedbackHR from "./pages/feedback/ViewFeedbackHR";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 // axios.defaults.withCredentials = true;
@@ -58,31 +62,9 @@ function App() {
         <Route path="/candidate" element={<AddCandidate />} />
         <Route path="/vacancies" element={<Vacancy />} />
 
-
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
-import './index.css'
-import Register from './components/register';
-import Example from './components/login';
-import AddFeedback from './pages/feedback/AddFeedback';
-import ViewFeedbackPM from './pages/feedback/ViewFeedbackPM';
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Example />} />
-        <Route path="/register" element={<Register />} />
-
-        <Route path = "/savefeedback" element={<AddFeedback/>}/>
-        <Route path = "/viewfeedbackpm" element={<ViewFeedbackPM/>}/>
+        <Route path = "/feedback/savefeedback" element={<AddFeedback/>}/>
+        <Route path = "/feedback/viewfeedbackpm" element={<ViewFeedbackPM/>}/>
+        <Route path = "/feedback/viewfeedbackhr" element={<ViewFeedbackHR/>}/>
       </Routes>
     </Router>
   );

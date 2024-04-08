@@ -22,6 +22,8 @@ const Table = ({ columns, data }) => {
         </tbody>
       </table>
     </div>
+
+    
   );
 };
 

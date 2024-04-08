@@ -3,12 +3,11 @@ import Table from "../../components/FeedbackViewTable";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const ViewFeedbackPM = () => {
-
+const ViewFeedbackHR = () => {
   const [data, setData] = useState([]);
 
   const loadData = async () => {
-    const response = await axios.get("http://localhost:8080/api/feedback/35");
+    const response = await axios.get("http://localhost:8080/api/feedback/43");
     setData(response.data.details.categoryMap);
   };
 
@@ -68,13 +67,13 @@ const ViewFeedbackPM = () => {
                 ))}
               </tbody>
             </table>
-            <div className="m-4 space-x-4 flex justify-between">
+            <div className="mt-4 space-x-4 flex justify-between">
               <button className="cursor-pointer">
                 <Link
                   to={""}
                   className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
                 >
-                  Hire Candidate
+                  Edit
                 </Link>
               </button>
               <button className="cursor-pointer">
@@ -82,7 +81,7 @@ const ViewFeedbackPM = () => {
                   to={""}
                   className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
                 >
-                  Reject Candidate
+                  Submit
                 </Link>
               </button>
             </div>
@@ -93,4 +92,4 @@ const ViewFeedbackPM = () => {
   );
 };
 
-export default ViewFeedbackPM;
+export default ViewFeedbackHR;
