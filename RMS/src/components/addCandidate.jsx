@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function AddCandidate() {
@@ -10,10 +10,10 @@ export default function AddCandidate() {
     nic: "",
     candidateName: {
       firstName: "",
-      lastName: ""
+      lastName: "",
     },
     experience: "",
-    qualifications: ""
+    qualifications: "",
   });
 
   const handleChange = (e) => {
@@ -24,23 +24,30 @@ export default function AddCandidate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:8080/api/candidates/${projectId}/add`, formData);
+      await axios.post(
+        `http://localhost:8080/api/candidates/${projectId}/add`,
+        formData
+      );
       // Redirect to project page or any other page after successful submission
       navigate(`/projects/${projectId}`);
     } catch (error) {
-      console.error('Error adding candidate:', error);
-      alert('Failed to add candidate. Please try again later.');
+      console.error("Error adding candidate:", error);
+      alert("Failed to add candidate. Please try again later.");
     }
   };
 
   return (
     <div className="bg-background min-h-screen flex flex-col justify-center items-center">
-      <h2 className="text-2xl font-bold leading-9 tracking-tight text-white mb-8">Add a Candidate</h2>
+      <h2 className="text-2xl font-bold leading-9 tracking-tight text-white mb-8">
+        Add a Candidate
+      </h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
-      
         <div className="flex space-x-4">
           <div className="w-1/2">
-            <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-white">
+            <label
+              htmlFor="firstName"
+              className="block text-sm font-medium leading-6 text-white"
+            >
               First Name
             </label>
             <input
@@ -55,7 +62,10 @@ export default function AddCandidate() {
             />
           </div>
           <div className="w-1/2">
-            <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-white">
+            <label
+              htmlFor="lastName"
+              className="block text-sm font-medium leading-6 text-white"
+            >
               Last Name
             </label>
             <input
@@ -72,7 +82,10 @@ export default function AddCandidate() {
         </div>
 
         <div className="w-full">
-          <label htmlFor="nic" className="block text-sm font-medium leading-6 text-white">
+          <label
+            htmlFor="nic"
+            className="block text-sm font-medium leading-6 text-white"
+          >
             NIC
           </label>
           <input
@@ -88,7 +101,10 @@ export default function AddCandidate() {
         </div>
 
         <div className="w-full">
-          <label htmlFor="experience" className="block text-sm font-medium leading-6 text-white">
+          <label
+            htmlFor="experience"
+            className="block text-sm font-medium leading-6 text-white"
+          >
             Experience (years)
           </label>
           <input
@@ -104,7 +120,10 @@ export default function AddCandidate() {
         </div>
 
         <div className="w-full">
-          <label htmlFor="qualifications" className="block text-sm font-medium leading-6 text-white">
+          <label
+            htmlFor="qualifications"
+            className="block text-sm font-medium leading-6 text-white"
+          >
             Qualifications
           </label>
           <textarea
