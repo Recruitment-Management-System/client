@@ -18,8 +18,11 @@ import Project from './components/projects';
 import VacancyTable from "./components/vacancyProject";
 
 
+
 import AddCandidate from "./components/addCandidate";
 import Vacancy from "./components/vacancy";
+
+
 import CandidateInfo from "./components/candidateInformation";
 import CandidateInfoPage from "./components/candidateInformation";
 import Interview from "./components/interview";
@@ -29,6 +32,7 @@ import InterviewsList from "./components/interviewsList";
 import AddFeedback from './pages/feedback/AddFeedback';
 import ViewFeedbackPM from './pages/feedback/ViewFeedbackPM';
 import ViewFeedbackHR from "./pages/feedback/ViewFeedbackHR";
+import AddFeedbackHR from "./pages/feedback/AddFeedbackHR";
 
 
 axios.defaults.baseURL = "http://localhost:8080/api";
@@ -72,7 +76,8 @@ function App() {
         <Route path="/interview" element={<Interview />} />
         <Route path="/interviewlist" element={<InterviewsList />} />
 
-        <Route path = "/feedback/savefeedback" element={<AddFeedback/>}/>
+        <Route path = "/feedback/savefeedback/:interviewID" element={<AddFeedback/>}/>
+        <Route path = "/feedback/savefeedbackhr/:interviewID" element={<AddFeedbackHR/>}/>
         <Route path = "/feedback/viewfeedbackpm" element={<ViewFeedbackPM/>}/>
         <Route path = "/feedback/viewfeedbackhr" element={<ViewFeedbackHR/>}/>
       </Routes>

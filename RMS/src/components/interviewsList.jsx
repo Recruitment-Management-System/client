@@ -21,7 +21,16 @@ const InterviewsList = () => {
         const userId = decodedToken.id;
 
         // Fetch interviews relevant to the user ID
+
         const response = await axios.get(`/interview/interviews/${userId}`);
+
+        const response = await axios.get(`/interview/interviews/${userId}`, {
+          //   headers: {
+          //     'Authorization': `Bearer ${token}`,
+          //     'Content-Type': 'application/json'
+          //   }
+        });
+
 
         if (response.status === 200) {
           setInterviews(response.data);
@@ -139,13 +148,25 @@ const InterviewsList = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
+
               {filteredInterviews.map((interview) => (
+
+              {interviews.map((interview) => (
+
                 <tr key={interview.interviewID}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewID}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
+
                     {interview.interviewType}
+
+                    {interview.interviewType === 2
+                      ? "Technical"
+                      : interview.interviewType == 1
+                      ? "HR"
+                      : interview.interviewType}
+
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewStatus}
@@ -163,9 +184,30 @@ const InterviewsList = () => {
                     >
                       CANDIDATES
                     </Link>
+
                     <Link className="text-red-600 hover:text-red-900 font-bold">
                       ADD FEEDBACK
                     </Link>
+
+                  </td>
+                  <td>
+                   {interview.interviewType === 2 ? (
+                      <Link
+                        to={`/feedback/savefeedback/${interview.interviewID}`}
+                        className="text-red-600 hover:text-red-900 font-bold"
+                      >
+                        ADD FEEDBACK
+                      </Link>
+                    ): interview.interviewType === 1 && (
+                      <Link
+                        to={`/feedback/savefeedbackhr/${interview.interviewID}`}
+                        className="text-red-600 hover:text-red-900 font-bold"
+                      >
+                        ADD FEEDBACK
+                      </Link>
+                    )}
+                    
+
                   </td>
                 </tr>
               ))}
@@ -174,6 +216,10 @@ const InterviewsList = () => {
         </div>
       )}
     </div>
+
+
+    // </div>
+
   );
 };
 
