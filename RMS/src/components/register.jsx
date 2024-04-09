@@ -55,7 +55,6 @@ export default function Register() {
         title: "Success!",
         text: "Account created successfully.",
       });
-
     } catch (error) {
       console.error("Error:", error);
       Swal.fire({

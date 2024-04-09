@@ -19,14 +19,15 @@ import VacancyTable from "./components/vacancyProject";
 
 
 
+import AddCandidate from "./components/addCandidate";
+import Vacancy from "./components/vacancy";
+
+
 import CandidateInfo from "./components/candidateInformation";
 import CandidateInfoPage from "./components/candidateInformation";
 import Interview from "./components/interview";
 import InterviewsList from "./components/interviewsList";
 
-
-import AddCandidate from "./components/addCandidate";
-import Vacancy from "./components/vacancy";
 
 import AddFeedback from './pages/feedback/AddFeedback';
 import ViewFeedbackPM from './pages/feedback/ViewFeedbackPM';
