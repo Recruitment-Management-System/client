@@ -12,13 +12,17 @@ import Interviewer from "./pages/Interviewer";
 import HrPerson from "./pages/HrPerson";
 import ProjectManager from "./pages/ProjectManager";
 
-import CreateVacancy from './modules/addVacancy';
-import UpdateVacancy from './modules/updatevacancy';
-import Project from './modules/projects';
-import VacancyTable from "./modules/vacancyProject";
+import CreateVacancy from './components/addVacancy';
+import UpdateVacancy from './components/updatevacancy';
+import Project from './components/projects';
+import VacancyTable from "./components/vacancyProject";
 import axios from "axios";
-import AddCandidate from "./modules/addCandidate";
-import Vacancy from "./modules/vacancy";
+import AddCandidate from "./components/addCandidate";
+import Vacancy from "./components/vacancy";
+import CandidateInfo from "./components/candidateInformation";
+import CandidateInfoPage from "./components/candidateInformation";
+import Interview from "./components/interview";
+import InterviewsList from "./components/interviewsList";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 // axios.defaults.withCredentials = true;
@@ -57,6 +61,9 @@ function App() {
 
         <Route path="/candidate" element={<AddCandidate />} />
         <Route path="/vacancies" element={<Vacancy />} />
+        <Route path="/candidate-information/:id" element={<CandidateInfoPage />} />
+        <Route path="/interview" element={<Interview />} />
+        <Route path="/interviewlist" element={<InterviewsList />} />
 
 
       </Routes>
