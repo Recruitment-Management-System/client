@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const AddFeedback = () => {
-  // const [formData, setFormData] = useState({
-  //   details: [],
-  //   overallrating: "",
-  //   feedbackdate: "",
-  //   secondinterview: false
-  // });
-
-  //Edit ddata
-  const {id} = useParams();
-
   
+  //Edit ddata
+  const { id } = useParams();
+
+  const { interviewID } = useParams();
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     details: {
@@ -31,148 +28,99 @@ const AddFeedback = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/feedback/${id}`)
-    .then((resp) => setFormData({...resp.data[0]}));
-  }, [id])
+    axios
+      .get(`/feedback/${id}`)
+      .then((resp) => setFormData({ ...resp.data[0] }));
+  }, [id]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  // const [user, setUser] = useState([]);
 
-  //   const details = {
-  //     categoryMap: {
-  //       "Educational_Background": {
-  //         score: e.target.elements.eduScore.value,
-  //         expectedCompetencyLevel: e.target.elements.eduExpected.value,
-  //         comment: e.target.elements.eduComment.value,
-  //       },
-  //       "Relevant_Experience": {
-  //         score: e.target.elements.expScore.value,
-  //         expectedCompetencyLevel: e.target.elements.expExpected.value,
-  //         comment: e.target.elements.expComment.value,
-  //       },
-  //       "Architecture_&_Systems Design": {
-  //         score: e.target.elements.archiScore.value,
-  //         expectedCompetencyLevel: e.target.elements.archiExpected.value,
-  //         comment: e.target.elements.archiComment.value,
-  //       },
-  //       "Software_Development_&_Programming,Methodologies_&_tools,Technical_Expertise":{
-  //         score: e.target.elements.devScore.value,
-  //         expectedCompetencyLevel: e.target.elements.devExpected.value,
-  //         comment: e.target.elements.devComment.value,
-  //       },
-  //       "Conceptual_Understanding":{
-  //         score: e.target.elements.conceptScore.value,
-  //         expectedCompetencyLevel: e.target.elements.conceptExpected.value,
-  //         comment: e.target.elements.conceptComment.value,
-  //       },
-  //       "Analytical_&_Problem_Solving_Skills":{
-  //         score: e.target.elements.ssScore.value,
-  //         expectedCompetencyLevel: e.target.elements.ssExpected.value,
-  //         comment: e.target.elements.ssComment.value,
-  //       },
-  //       "Team_Work":{
-  //         score: e.target.elements.teamScore.value,
-  //         expectedCompetencyLevel: e.target.elements.teamExpected.value,
-  //         comment: e.target.elements.teamComment.value,
-  //       },
-  //       "Leadership":{
-  //         score: e.target.elements.leadScore.value,
-  //         expectedCompetencyLevel: e.target.elements.leadExpected.value,
-  //         comment: e.target.elements.leadComment.value,
-  //       },
-  //       "Growth_Potential_&_Achievements":{
-  //         score: e.target.elements.achScore.value,
-  //         expectedCompetencyLevel: e.target.elements.achExpected.value,
-  //         comment: e.target.elements.achComment.value,
-  //       },
-  //       "Communication_Skills":{
-  //         score: e.target.elements.cmmScore.value,
-  //         expectedCompetencyLevel: e.target.elements.cmmExpected.value,
-  //         comment: e.target.elements.cmmComment.value,
-  //       }
-  //     },
-  //   };
+  // useEffect(() => {
+  //   const fetchInterviewer = async () => {
+  //     try {
+  //       // Fetch JWT token from local storage
+  //       const token = localStorage.getItem("token");
 
-  //   setFormData({ ...formData, details });
+  //       // Decode JWT token to extract user ID
+  //       const decodedToken = jwtDecode(token);
+  //       const userId = decodedToken.id;
 
-  //   console.log(formData);
-
-  //   try {
-  //     const response = await axios
-  //       .post("http://localhost:8080/api/feedback/savefeedback", formData)
-  //       .then(() => {
-  //         alert("Send Feedback successfully");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
+  //       // Fetch interviews relevant to the user ID
+  //       const response = await axios.get(`/${userId}`, {
+  //         //   headers: {
+  //         //     'Authorization': `Bearer ${token}`,
+  //         //     'Content-Type': 'application/json'
+  //         //   }
   //       });
 
-  //     setFormData({
-  //       details: [],
-  //       overallrating: "",
-  //       feedbackdate: "",
-  //       secondinterview: false
-  //     });
-  //   } catch (e) {
-  //     alert("Feedback creation failed");
-  //   }
-  // };
+  //       if (response.status === 200) {
+  //         setUser(response.data);
+  //       } else {
+  //         // Handle error
+  //         console.error("Failed to fetch interviewer:", response.statusText);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching interviewers:", error);
+  //     } 
+  //   };
+  //   fetchInterviewer();
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const categoryMap = {
-      "Educational_Background": {
+      Educational_Background: {
         score: e.target.elements.eduScore.value || "",
         expectedCompetencyLevel: e.target.elements.eduExpected.value || "",
         comment: e.target.elements.eduComment.value || "",
       },
-      "Relevant_Experience": {
+      Relevant_Experience: {
         score: e.target.elements.expScore.value || "",
         expectedCompetencyLevel: e.target.elements.expExpected.value || "",
         comment: e.target.elements.expComment.value || "",
       },
-      // "Architecture_and_Systems_Design": {
-      //   score: e.target.elements.archiScore.value,
-      //   expectedCompetencyLevel: e.target.elements.archiExpected.value,
-      //   comment: e.target.elements.archiComment.value,
-      // },
-      // "Software_Development_and_Programming,Methodologies_and_tools,Technical_Expertise":
-      //   {
-      //     score: e.target.elements.devScore.value,
-      //     expectedCompetencyLevel: e.target.elements.devExpected.value,
-      //     comment: e.target.elements.devComment.value,
-      //   },
-      // "Conceptual_Understanding": {
-      //   score: e.target.elements.conceptScore.value,
-      //   expectedCompetencyLevel: e.target.elements.conceptExpected.value,
-      //   comment: e.target.elements.conceptComment.value,
-      // },
-      // "Analytical_and_Problem_Solving_Skills": {
-      //   score: e.target.elements.ssScore.value,
-      //   expectedCompetencyLevel: e.target.elements.ssExpected.value,
-      //   comment: e.target.elements.ssComment.value,
-      // },
-      // "Team_Work": {
-      //   score: e.target.elements.teamScore.value,
-      //   expectedCompetencyLevel: e.target.elements.teamExpected.value,
-      //   comment: e.target.elements.teamComment.value,
-      // },
-      // "Leadership": {
-      //   score: e.target.elements.leadScore.value,
-      //   expectedCompetencyLevel: e.target.elements.leadExpected.value,
-      //   comment: e.target.elements.leadComment.value,
-      // },
-      // "Growth_Potential_and_Achievements": {
-      //   score: e.target.elements.achScore.value,
-      //   expectedCompetencyLevel: e.target.elements.achExpected.value,
-      //   comment: e.target.elements.achComment.value,
-      // },
-      // "Communication_Skills": {
-      //   score: e.target.elements.cmmScore.value,
-      //   expectedCompetencyLevel: e.target.elements.cmmExpected.value,
-      //   comment: e.target.elements.cmmComment.value,
-      // },
+      "Architecture_and_Systems_Design": {
+        score: e.target.elements.archiScore.value,
+        expectedCompetencyLevel: e.target.elements.archiExpected.value,
+        comment: e.target.elements.archiComment.value,
+      },
+      "Software_Development_and_Programming,Methodologies_and_tools,Technical_Expertise":
+        {
+          score: e.target.elements.devScore.value,
+          expectedCompetencyLevel: e.target.elements.devExpected.value,
+          comment: e.target.elements.devComment.value,
+        },
+      "Conceptual_Understanding": {
+        score: e.target.elements.conceptScore.value,
+        expectedCompetencyLevel: e.target.elements.conceptExpected.value,
+        comment: e.target.elements.conceptComment.value,
+      },
+      "Analytical_and_Problem_Solving_Skills": {
+        score: e.target.elements.ssScore.value,
+        expectedCompetencyLevel: e.target.elements.ssExpected.value,
+        comment: e.target.elements.ssComment.value,
+      },
+      "Team_Work": {
+        score: e.target.elements.teamScore.value,
+        expectedCompetencyLevel: e.target.elements.teamExpected.value,
+        comment: e.target.elements.teamComment.value,
+      },
+      "Leadership": {
+        score: e.target.elements.leadScore.value,
+        expectedCompetencyLevel: e.target.elements.leadExpected.value,
+        comment: e.target.elements.leadComment.value,
+      },
+      "Growth_Potential_and_Achievements": {
+        score: e.target.elements.achScore.value,
+        expectedCompetencyLevel: e.target.elements.achExpected.value,
+        comment: e.target.elements.achComment.value,
+      },
+      "Communication_Skills": {
+        score: e.target.elements.cmmScore.value,
+        expectedCompetencyLevel: e.target.elements.cmmExpected.value,
+        comment: e.target.elements.cmmComment.value,
+      },
     };
 
     const details = {
@@ -191,11 +139,9 @@ const AddFeedback = () => {
     console.log(feedbackData);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/feedback/savefeedback",
-        feedbackData
-      );
+      const response = await axios.post(`/feedback/${interviewID}/savefeedback`, feedbackData);
       alert("Feedback sent successfully");
+      navigate(`/interviewlist`);
 
       setFormData({
         details: {
@@ -220,8 +166,18 @@ const AddFeedback = () => {
           </h2>
         </div>
 
-        <form className="space-y-6  mx-96" onSubmit={handleSubmit}>
-          <div>
+
+        {/* <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white"> Interviewed By : </h1>
+        <p className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+          {user.map((interviewer) => (
+            <React.Fragment key={interviewer.id}>
+              {interviewer.firstName} {interviewer.lastname}
+            </React.Fragment>
+          ))}
+        </p> */}
+
+         <form className="space-y-6  mx-96" onSubmit={handleSubmit}>
+         {/* <div>
             <label
               htmlFor="jobTitle"
               className="block text-sm font-medium leading-6 text-white"
@@ -255,24 +211,7 @@ const AddFeedback = () => {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="interviewerName"
-              className="block text-sm font-medium leading-6 text-white"
-            >
-              Interviewed By
-            </label>
-            <div className="mt-2">
-              <input
-                id="interviewerName"
-                name="interviewerName"
-                type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
+          </div> */}
 
           <div>
             <label
@@ -478,7 +417,8 @@ const AddFeedback = () => {
                 </tr>
                 <tr>
                   <td className="border">
-                    Software Development & Programming, Methodologies & tools, Technical Expertise
+                    Software Development & Programming, Methodologies & tools,
+                    Technical Expertise
                   </td>
                   <td className="border">
                     <div className="mt-2">
