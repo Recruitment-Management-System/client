@@ -22,13 +22,12 @@ const CandidateList = () => {
   return (
     <>
       <div className="bg-gray-200 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-4">
+        <div className="justify-between items-center mb-4">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
               Candidate List
             </h2>
           </div>
-          <div className="flex items-center space-x-4">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-800">
@@ -118,7 +117,7 @@ const CandidateList = () => {
             </div>
           </div>
         </div>
-      </div>
+      
     </>
   );
 };
