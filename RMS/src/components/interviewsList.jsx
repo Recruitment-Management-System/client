@@ -24,14 +24,6 @@ const InterviewsList = () => {
 
         const response = await axios.get(`/interview/interviews/${userId}`);
 
-        const response = await axios.get(`/interview/interviews/${userId}`, {
-          //   headers: {
-          //     'Authorization': `Bearer ${token}`,
-          //     'Content-Type': 'application/json'
-          //   }
-        });
-
-
         if (response.status === 200) {
           setInterviews(response.data);
           setFilteredInterviews(response.data); // Initialize filtered interviews with all interviews
@@ -148,17 +140,12 @@ const InterviewsList = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-
               {filteredInterviews.map((interview) => (
-
-              {interviews.map((interview) => (
-
-                <tr key={interview.interviewID}>
+                <tr key={interview.interviewid}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {interview.interviewID}
+                    {interview.interviewid}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-
                     {interview.interviewType}
 
                     {interview.interviewType === 2
@@ -166,7 +153,6 @@ const InterviewsList = () => {
                       : interview.interviewType == 1
                       ? "HR"
                       : interview.interviewType}
-
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewStatus}
@@ -179,35 +165,48 @@ const InterviewsList = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
-                      to={`/candidate-information/${interview.interviewID}`}
+                      to={`/candidate-information/${interview.interviewid}`}
                       className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                     >
                       CANDIDATES
                     </Link>
-
-                    <Link className="text-red-600 hover:text-red-900 font-bold">
-                      ADD FEEDBACK
-                    </Link>
-
                   </td>
                   <td>
-                   {interview.interviewType === 2 ? (
+                    {(interview.interviewStatus === 1 ||
+                      interview.interviewStatus === 3) &&
+                    interview.interviewType === 2 ? (
                       <Link
-                        to={`/feedback/savefeedback/${interview.interviewID}`}
+                        to={`/feedback/savefeedback/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
                       </Link>
-                    ): interview.interviewType === 1 && (
+                    ) : (interview.interviewStatus === 1 ||
+                        interview.interviewStatus === 3) &&
+                      interview.interviewType === 1 ? (
                       <Link
-                        to={`/feedback/savefeedbackhr/${interview.interviewID}`}
+                        to={`/feedback/savefeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
                       </Link>
-                    )}
-                    
-
+                    ) : interview.interviewStatus === 2 &&
+                      interview.interviewType === 1 ? (
+                      <Link
+                        to={`/feedback/viewfeedbackhr/${interview.interviewid}`}
+                        className="text-red-600 hover:text-red-900 font-bold"
+                      >
+                        VIEW FEEDBACK
+                      </Link>
+                    ) : interview.interviewStatus === 2 &&
+                    interview.interviewType === 2 ?(
+                      <Link
+                        to={`/feedback/viewfeedbackin/${interview.interviewid}`}
+                        className="text-red-600 hover:text-red-900 font-bold"
+                      >
+                        VIEW FEEDBACK
+                      </Link>
+                    ): null}
                   </td>
                 </tr>
               ))}
@@ -216,10 +215,6 @@ const InterviewsList = () => {
         </div>
       )}
     </div>
-
-
-    // </div>
-
   );
 };
 

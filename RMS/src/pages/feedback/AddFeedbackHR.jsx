@@ -14,7 +14,7 @@ const AddFeedbackHR = () => {
   const [formData, setFormData] = useState({
     feedbackdate: "",
     salaryexpectation: "",
-    comment: ""
+    comment: "",
   });
 
   const handleChange = (e) => {
@@ -66,9 +66,9 @@ const AddFeedbackHR = () => {
     e.preventDefault();
 
     const feedbackData = {
-        feedbackdate: formData.feedbackdate,
-        salaryexpectation: formData.salaryexpectation,
-        comment: formData.comment
+      feedbackdate: formData.feedbackdate,
+      salaryexpectation: formData.salaryexpectation,
+      comment: formData.comment,
     };
 
     setFormData({ ...formData, feedbackData });
@@ -77,7 +77,7 @@ const AddFeedbackHR = () => {
 
     try {
       const response = await axios.post(
-        `/feedback/${interviewID}/savefeedbackhr`,
+        `/feedbackhr/${interviewID}/savefeedbackhr`,
         feedbackData
       );
       alert("Feedback sent successfully");
@@ -85,8 +85,8 @@ const AddFeedbackHR = () => {
 
       setFormData({
         feedbackdate: "",
-    salaryexpectation: "",
-    comment: ""
+        salaryexpectation: "",
+        comment: "",
       });
     } catch (error) {
       console.log(error.message);

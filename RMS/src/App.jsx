@@ -30,7 +30,7 @@ import InterviewsList from "./components/interviewsList";
 
 
 import AddFeedback from './pages/feedback/AddFeedback';
-import ViewFeedbackPM from './pages/feedback/ViewFeedbackPM';
+import ViewFeedbackInterviewer from './pages/feedback/ViewFeedbackInterviewer';
 import ViewFeedbackHR from "./pages/feedback/ViewFeedbackHR";
 import AddFeedbackHR from "./pages/feedback/AddFeedbackHR";
 
@@ -78,8 +78,8 @@ function App() {
 
         <Route path = "/feedback/savefeedback/:interviewID" element={<AddFeedback/>}/>
         <Route path = "/feedback/savefeedbackhr/:interviewID" element={<AddFeedbackHR/>}/>
-        <Route path = "/feedback/viewfeedbackpm" element={<ViewFeedbackPM/>}/>
-        <Route path = "/feedback/viewfeedbackhr" element={<ViewFeedbackHR/>}/>
+        <Route path = "/feedback/viewfeedbackin/:interviewid" element={<ViewFeedbackInterviewer/>}/>
+        <Route path = "/feedback/viewfeedbackhr/:interviewid" element={<ViewFeedbackHR/>}/>
       </Routes>
     </Router>
   );

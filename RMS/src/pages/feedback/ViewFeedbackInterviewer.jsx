@@ -9,7 +9,7 @@ const ViewFeedbackInterviewer = () => {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`/feedbackhr/interview/${interviewid}`);
+      const response = await axios.get(`/feedback/interview/${interviewid}`);
       setFeedback(response.data);
     } catch (error) {
       console.error("Error fetching feedback:", error);
@@ -39,19 +39,19 @@ const ViewFeedbackInterviewer = () => {
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                     >
-                      Date
+                      Overall Rating
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                     >
-                      Salary Expectation
+                      Second Interview
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                     >
-                      Comment
+                      Feedback Date
                     </th>
                   </tr>
                 </thead>
@@ -59,25 +59,82 @@ const ViewFeedbackInterviewer = () => {
                   {feedback && (
                     <tr>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {feedback.feedbackidhr}
+                        {feedback.feedbackid}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {feedback.overallrating}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {feedback.secondinterview ? "Yes" : "No"}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {new Date(feedback.feedbackdate).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {feedback.salaryexpectation}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {feedback.comment}
-                      </td>
                     </tr>
                   )}
-                  
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        <div>
+          {feedback && (
+            <div className="mt-8">
+              <h2 className="text-lg font-medium text-gray-800 mb-4">
+                Feedback Details
+              </h2>
+              <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div className="px-4 py-5 sm:px-6">
+                  <h3 className="mt-1 max-w-2xl text-sm text-gray-500">
+                    Details of categories
+                  </h3>
+                </div>
+                <div className="border-t border-gray-200">
+                  <dl>
+                    {Object.entries(feedback.details.categoryMap).map(
+                      ([category, values]) => (
+                        <div
+                          key={category}
+                          className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                        >
+                          <dt className="text-sm font-medium text-gray-500">
+                            {category}
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                            <div>Score: {values.score}</div>
+                            <div>
+                              Expected Competency Level:{" "}
+                              {values.expectedCompetencyLevel}
+                            </div>
+                            <div>Comment: {values.comment}</div>
+                          </dd>
+                        </div>
+                      )
+                    )}
+                  </dl>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="m-4 space-x-4 flex justify-between">
+        <button className="cursor-pointer">
+          <Link
+            to={"/interviewlist"}
+            className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
+          >
+            Back
+          </Link>
+        </button>
+        <button className="cursor-pointer">
+          <Link
+            to={""}
+            className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
+          >
+            Update Feedback
+          </Link>
+        </button>
       </div>
     </>
   );
