@@ -33,6 +33,8 @@ import AddFeedback from './pages/feedback/AddFeedback';
 import ViewFeedbackInterviewer from './pages/feedback/ViewFeedbackInterviewer';
 import ViewFeedbackHR from "./pages/feedback/ViewFeedbackHR";
 import AddFeedbackHR from "./pages/feedback/AddFeedbackHR";
+import CandidateList from "./components/CandidateList";
+import UpdateFeedbackHR from "./pages/feedback/UpdateFeedbackHR";
 
 
 axios.defaults.baseURL = "http://localhost:8080/api";
@@ -80,6 +82,8 @@ function App() {
         <Route path = "/feedback/savefeedbackhr/:interviewID" element={<AddFeedbackHR/>}/>
         <Route path = "/feedback/viewfeedbackin/:interviewid" element={<ViewFeedbackInterviewer/>}/>
         <Route path = "/feedback/viewfeedbackhr/:interviewid" element={<ViewFeedbackHR/>}/>
+        <Route path = "/candidatelist/:vacancyid" element={<CandidateList/>}/>
+        <Route path = "/feedback/update/:feedbackhrid" element={<UpdateFeedbackHR/>}/>
       </Routes>
     </Router>
   );

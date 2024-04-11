@@ -70,12 +70,23 @@ const ViewFeedbackInterviewer = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         {feedback.comment}
                       </td>
+                      <td>
+                        <button className="cursor-pointer">
+                          <Link
+                            to={`/feedback/update/${feedback.feedbackidhr}`}
+                            className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
+                          >
+                            Update Feedback
+                          </Link>
+                        </button>
+                      </td>
                     </tr>
                   )}
-                  
                 </tbody>
               </table>
             </div>
+
+            
           </div>
         </div>
       </div>

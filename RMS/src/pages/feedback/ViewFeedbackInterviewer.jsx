@@ -24,6 +24,17 @@ const ViewFeedbackInterviewer = () => {
     <>
       <div className="flex justify-center items-center min-h-screen bg-gray-200">
         <div className="flex justify-between items-center mb-4">
+        <div className="m-4 space-x-4 flex justify-between">
+        <button className="cursor-pointer">
+          <Link
+            to={"/interviewlist"}
+            className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
+          >
+            Back
+          </Link>
+        </button>
+        
+      </div>
           <div className="flex items-center space-x-4">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
@@ -66,6 +77,7 @@ const ViewFeedbackInterviewer = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {feedback.secondinterview ? "Yes" : "No"}
+                        
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {new Date(feedback.feedbackdate).toLocaleDateString()}
@@ -118,24 +130,7 @@ const ViewFeedbackInterviewer = () => {
           )}
         </div>
       </div>
-      <div className="m-4 space-x-4 flex justify-between">
-        <button className="cursor-pointer">
-          <Link
-            to={"/interviewlist"}
-            className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
-          >
-            Back
-          </Link>
-        </button>
-        <button className="cursor-pointer">
-          <Link
-            to={""}
-            className="text-white rounded-sm text-1xl px-5 py-3 bg-[#222831]"
-          >
-            Update Feedback
-          </Link>
-        </button>
-      </div>
+      
     </>
   );
 };
