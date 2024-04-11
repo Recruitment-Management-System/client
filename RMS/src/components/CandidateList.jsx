@@ -105,7 +105,7 @@ const CandidateList = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <Link
-                          to={``}
+                          to={`/feedback/candidates/${candidate.candidateID}`}
                           className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                         >
                           View Feedbacks
