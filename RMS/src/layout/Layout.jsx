@@ -18,6 +18,8 @@ import Logout from "../components/Logout";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Candidates from "../components/Candidates";
+import CandidateDetails from "../components/CandidateDetails";
+import AddInterview from "../components/AddInterview";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -65,7 +67,15 @@ const Layout = () => {
 
               <Route path="/vacancies" element={<Vacancy />} />
               <Route path="/add/:vacancyID" element={<AddCandidate />} />
-              <Route path="/abc/:vacancyID" element={<Candidates />} />
+              <Route path="/candidates/:vacancyID" element={<Candidates />} />
+              <Route
+                path="/add-interview/:candidateID"
+                element={<AddInterview />}
+              />
+              <Route
+                path="/candidate-details/:candidateID"
+                element={<CandidateDetails />}
+              />
             </Routes>
           </div>
         </div>

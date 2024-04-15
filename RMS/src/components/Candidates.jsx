@@ -125,9 +125,7 @@ function Candidates() {
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-              >
-                Interview
-              </th>
+              ></th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -153,16 +151,16 @@ function Candidates() {
                 </td> */}
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/update-vacancy/${candidate.candidateID}`}
+                    to={`/candidate-details/${candidate.candidateID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
-                    CANDIDATES
+                    MORE DETAILS
                   </Link>
                   <Link
                     className="text-red-600 hover:text-red-900 font-bold"
-                    // to={`/add/${vacancy.vacancyID}`}
+                    to={`/add-interview/${candidate.candidateID}`}
                   >
-                    ADD CANDIDATE
+                    ADD INTERVIEW
                   </Link>
                 </td>
               </tr>

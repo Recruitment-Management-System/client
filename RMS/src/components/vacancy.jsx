@@ -154,7 +154,7 @@ function Vacancy() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/update-vacancy/${vacancy.vacancyID}`}
+                    to={`/candidates/${vacancy.vacancyID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     CANDIDATES
