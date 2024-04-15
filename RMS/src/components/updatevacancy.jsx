@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import logo from '../assets/logo.jpg';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+
+import logo from "../assets/logo.jpg";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 export default function UpdateVacancy() {
   const { vacancyID } = useParams(); // Get vacancyId from URL params
@@ -11,7 +13,9 @@ export default function UpdateVacancy() {
     jobRefCode: "",
     openings: "",
     status: "",
-    reason: ""
+
+    reason: "",
+
   });
 
   useEffect(() => {
@@ -26,10 +30,12 @@ export default function UpdateVacancy() {
           jobRefCode: vacancyData.jobRefCode,
           openings: vacancyData.openings,
           status: vacancyData.status,
-          reason: vacancyData.reason
+
+          reason: vacancyData.reason,
         });
       } catch (error) {
-        console.error('Error fetching vacancy data:', error);
+        console.error("Error fetching vacancy data:", error);
+
       }
     };
 
@@ -45,11 +51,13 @@ export default function UpdateVacancy() {
     e.preventDefault();
     try {
       await axios.put(`/vacancies/update/${vacancyID}`, formData);
-      alert('Vacancy updated successfully!');
+
+      alert("Vacancy updated successfully!");
       // Redirect to previous page or any other page after successful update
     } catch (error) {
-      console.error('Error updating vacancy:', error);
-      alert('Failed to update vacancy. Please try again later.');
+      console.error("Error updating vacancy:", error);
+      alert("Failed to update vacancy. Please try again later.");
+
     }
   };
 
@@ -66,7 +74,12 @@ export default function UpdateVacancy() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="jobRole" className="block text-sm font-medium leading-6 text-white">
+
+              <label
+                htmlFor="jobRole"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+
                 Job Role
               </label>
               <div className="mt-2">
@@ -83,7 +96,12 @@ export default function UpdateVacancy() {
               </div>
             </div>
             <div>
-              <label htmlFor="jobRefCode" className="block text-sm font-medium leading-6 text-white">
+
+              <label
+                htmlFor="jobRefCode"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+
                 Job Reference Code
               </label>
               <div className="mt-2">
@@ -100,7 +118,12 @@ export default function UpdateVacancy() {
               </div>
             </div>
             <div>
-              <label htmlFor="openings" className="block text-sm font-medium leading-6 text-white">
+
+              <label
+                htmlFor="openings"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+
                 Openings
               </label>
               <div className="mt-2">
@@ -117,7 +140,12 @@ export default function UpdateVacancy() {
               </div>
             </div>
             <div>
-              <label htmlFor="status" className="block text-sm font-medium leading-6 text-white">
+
+              <label
+                htmlFor="status"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+
                 Status
               </label>
               <div className="mt-2">
@@ -137,7 +165,12 @@ export default function UpdateVacancy() {
               </div>
             </div>
             <div>
-              <label htmlFor="reason" className="block text-sm font-medium leading-6 text-white">
+
+              <label
+                htmlFor="reason"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+
                 Reason
               </label>
               <div className="mt-2">

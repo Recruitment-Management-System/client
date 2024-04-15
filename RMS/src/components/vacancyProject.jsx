@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 function VacancyTable() {
   const [vacancies, setVacancies] = useState([]);
   const [filteredVacancies, setFilteredVacancies] = useState([]);
-  const [filterOption, setFilterOption] = useState('all'); // Default filter option
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+
+  const [filterOption, setFilterOption] = useState("all"); // Default filter option
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+
   const { projectId } = useParams(); // Get projectId from URL params
 
   useEffect(() => {
@@ -17,7 +21,9 @@ function VacancyTable() {
         setVacancies(response.data);
         setFilteredVacancies(response.data); // Initially set filtered vacancies to all vacancies
       } catch (error) {
-        console.error('Error fetching vacancies:', error);
+
+        console.error("Error fetching vacancies:", error);
+
       }
     };
 
@@ -30,11 +36,15 @@ function VacancyTable() {
     setFilterOption(option);
 
     // Filter vacancies based on the selected option
-    if (option === 'open') {
-      const filtered = vacancies.filter(vacancy => vacancy.status === 'OPEN');
+
+    if (option === "open") {
+      const filtered = vacancies.filter((vacancy) => vacancy.status === "OPEN");
       setFilteredVacancies(filtered);
-    } else if (option === 'closed') {
-      const filtered = vacancies.filter(vacancy => vacancy.status === 'CLOSED');
+    } else if (option === "closed") {
+      const filtered = vacancies.filter(
+        (vacancy) => vacancy.status === "CLOSED"
+      );
+
       setFilteredVacancies(filtered);
     } else {
       setFilteredVacancies(vacancies);
@@ -48,7 +58,9 @@ function VacancyTable() {
 
   // Filter vacancies by job role based on search term
   useEffect(() => {
-    const filtered = vacancies.filter(vacancy =>
+
+    const filtered = vacancies.filter((vacancy) =>
+
       vacancy.jobRole.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredVacancies(filtered);
@@ -78,7 +90,12 @@ function VacancyTable() {
             <option value="closed">Closed</option>
           </select>
         </div>
-        <Link to={`/create-vacancy/${projectId}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+
+        <Link
+          to={`/create-vacancy/${projectId}`}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+
           Create Vacancy
         </Link>
       </div>
@@ -87,29 +104,89 @@ function VacancyTable() {
           <thead className="bg-gray-800">
             <tr>
               {/* Table headers */}
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Vacancy ID</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Job Role</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Job Reference Code</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Openings</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Status</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Reason</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Actions</th>
+
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+              >
+                Vacancy ID
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+              >
+                Job Role
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+              >
+                Job Reference Code
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+              >
+                Openings
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+              >
+                Status
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+              >
+                Reason
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+              >
+                Actions
+              </th>
+
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {/* Render filtered vacancies */}
-            {filteredVacancies.map(vacancy => (
+
+            {filteredVacancies.map((vacancy) => (
               <tr key={vacancy.vacancyID}>
                 {/* Table data */}
-                <td className="px-6 py-4 whitespace-nowrap">{vacancy.vacancyID}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{vacancy.jobRole}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{vacancy.jobRefCode}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{vacancy.openings}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{vacancy.status}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{vacancy.reason}</td>
+                <Link to={`/candidatelist/${vacancy.vacancyID}`}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {vacancy.vacancyID}
+                  </td>
+                </Link>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {vacancy.jobRole}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {vacancy.jobRefCode}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {vacancy.openings}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {vacancy.status}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {vacancy.reason}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <Link to={`/update-vacancy/${vacancy.vacancyID}`} className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold">EDIT</Link>
-                  <Link className="text-red-600 hover:text-red-900 font-bold">CLOSE</Link>
+                  <Link
+                    to={`/update-vacancy/${vacancy.vacancyID}`}
+                    className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
+                  >
+                    EDIT
+                  </Link>
+                  <Link className="text-red-600 hover:text-red-900 font-bold">
+                    CLOSE
+                  </Link>
+
                 </td>
               </tr>
             ))}
