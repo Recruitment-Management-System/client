@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useEffect } from "react";
 
@@ -42,7 +41,11 @@ axios.defaults.baseURL = "http://localhost:8080/api";
 // axios.defaults.withCredentials = true;
 
 
+import Layout from "./layout/Layout";
+
 function App() {
+
+
 
   useEffect(()=>{
     const token = localStorage.getItem("token");
@@ -58,7 +61,7 @@ function App() {
   return (
     <Router>
       <Routes>
-
+        <Layout/>
         <Route path="/" element={<Home />} />
         <Route path="/api/login" element={<Login />} />
         <Route path="/api/register" element={<Register />} />
@@ -89,6 +92,7 @@ function App() {
       </Routes>
     </Router>
   );
+
 }
 
 export default App;
