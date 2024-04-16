@@ -34,11 +34,11 @@ export default function AddCandidate() {
     formDataWithCV.append("experience", formData.experience);
     formDataWithCV.append("qualification", formData.qualification);
     formDataWithCV.append("description", formData.description);
-    formDataWithCV.append("cv", formData.cv);
+    formDataWithCV.append("file", formData.cv);
 
     try {
       await axios.post(
-       `/candidate/add_candidate?file=${encodeURIComponent(formData.cv.name)}`,
+       `/candidate/add_candidate`,
         formDataWithCV,
         {
           headers: {
