@@ -151,14 +151,14 @@ function Candidates() {
                 </td> */}
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/candidate-details/${candidate.candidateID}`}
+                    to={`/api/hr_person/candidate-details/${candidate.candidateID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     MORE DETAILS
                   </Link>
                   <Link
                     className="text-red-600 hover:text-red-900 font-bold"
-                    to={`/add-interview/${candidate.candidateID}`}
+                    to={`/api/hr_person/add-interview/${candidate.candidateID}`}
                   >
                     ADD INTERVIEW
                   </Link>

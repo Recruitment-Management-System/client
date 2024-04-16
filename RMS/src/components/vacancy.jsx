@@ -154,17 +154,16 @@ function Vacancy() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/candidates/${vacancy.vacancyID}`}
+                    to={`/api/hr_person/candidates/${vacancy.vacancyID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     CANDIDATES
                   </Link>
 
-                 <Link
+                  <Link
                     className="text-red-600 hover:text-red-900 font-bold"
-                    to={`/add/${vacancy.vacancyID}`}
+                    to={`/api/hr_person/add/${vacancy.vacancyID}`}
                   >
-
                     ADD CANDIDATE
                   </Link>
                 </td>
