@@ -141,9 +141,9 @@ const InterviewsList = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredInterviews.map((interview) => (
-                <tr key={interview.interviewID}>
+                <tr key={interview.interviewid}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {interview.interviewID}
+                    {interview.interviewid}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewType}
@@ -161,7 +161,7 @@ const InterviewsList = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
-                      to={`/candidate-information/${interview.interviewID}`}
+                      to={`/candidate-information/${interview.interviewid}`}
                       className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                     >
                       CANDIDATES
@@ -180,7 +180,7 @@ const InterviewsList = () => {
                         interview.interviewStatus === "HAPPENING") &&
                       interview.interviewType === "HR" ? (
                       <Link
-                        to={`/feedback/savefeedbackhr/${interview.interviewID}`}
+                        to={`/feedback/savefeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
@@ -188,7 +188,7 @@ const InterviewsList = () => {
                     ) : interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "HR" ? (
                       <Link
-                        to={`/feedback/viewfeedbackhr/${interview.interviewID}`}
+                        to={`/feedback/viewfeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK
@@ -196,7 +196,7 @@ const InterviewsList = () => {
                     ) : interview.interviewStatus === "ENDED" &&
                     interview.interviewType === "TECHNICAL" ?(
                       <Link
-                        to={`/feedback/viewfeedbackin/${interview.interviewID}`}
+                        to={`/feedback/viewfeedbackin/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK

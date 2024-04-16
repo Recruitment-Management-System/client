@@ -28,6 +28,7 @@ import UpdateFeedbackHR from "../pages/feedback/UpdateFeedbackHR";
 import CandidateInterviewsList from "../components/candidateInterviewList";
 
 import InterviewsList from "../components/interviewsList";
+import CandidateInfoPage from "../components/candidateInformation";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -113,7 +114,9 @@ const Layout = () => {
                 element={<CandidateInterviewsList />}
               />
 
-              <Route path="/interviewlist" element={<InterviewsList />} />
+              <Route path="/interviewlist/:userId" element={<InterviewsList />} />
+
+              <Route path="/candidate-information/:id" element={<CandidateInfoPage />}/>
             </Routes>
           </div>
         </div>
