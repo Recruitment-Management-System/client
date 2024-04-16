@@ -4,7 +4,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const AddFeedback = () => {
-  
   //Edit ddata
   const { id } = useParams();
 
@@ -33,7 +32,6 @@ const AddFeedback = () => {
       .then((resp) => setFormData({ ...resp.data[0] }));
   }, [id]);
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,7 +46,7 @@ const AddFeedback = () => {
         expectedCompetencyLevel: e.target.elements.expExpected.value,
         comment: e.target.elements.expComment.value,
       },
-      "Architecture_and_Systems_Design": {
+      Architecture_and_Systems_Design: {
         score: e.target.elements.archiScore.value,
         expectedCompetencyLevel: e.target.elements.archiExpected.value,
         comment: e.target.elements.archiComment.value,
@@ -59,32 +57,32 @@ const AddFeedback = () => {
           expectedCompetencyLevel: e.target.elements.devExpected.value,
           comment: e.target.elements.devComment.value,
         },
-      "Conceptual_Understanding": {
+      Conceptual_Understanding: {
         score: e.target.elements.conceptScore.value,
         expectedCompetencyLevel: e.target.elements.conceptExpected.value,
         comment: e.target.elements.conceptComment.value,
       },
-      "Analytical_and_Problem_Solving_Skills": {
+      Analytical_and_Problem_Solving_Skills: {
         score: e.target.elements.ssScore.value,
         expectedCompetencyLevel: e.target.elements.ssExpected.value,
         comment: e.target.elements.ssComment.value,
       },
-      "Team_Work": {
+      Team_Work: {
         score: e.target.elements.teamScore.value,
         expectedCompetencyLevel: e.target.elements.teamExpected.value,
         comment: e.target.elements.teamComment.value,
       },
-      "Leadership": {
+      Leadership: {
         score: e.target.elements.leadScore.value,
         expectedCompetencyLevel: e.target.elements.leadExpected.value,
         comment: e.target.elements.leadComment.value,
       },
-      "Growth_Potential_and_Achievements": {
+      Growth_Potential_and_Achievements: {
         score: e.target.elements.achScore.value,
         expectedCompetencyLevel: e.target.elements.achExpected.value,
         comment: e.target.elements.achComment.value,
       },
-      "Communication_Skills": {
+      Communication_Skills: {
         score: e.target.elements.cmmScore.value,
         expectedCompetencyLevel: e.target.elements.cmmExpected.value,
         comment: e.target.elements.cmmComment.value,
@@ -107,9 +105,14 @@ const AddFeedback = () => {
     console.log(feedbackData);
 
     try {
-      const response = await axios.post(`/feedback/${interviewID}/savefeedback`, feedbackData);
+      const response = await axios.post(
+        `/feedback/${interviewID}/savefeedback`,
+        feedbackData
+      );
       alert("Feedback sent successfully");
       navigate(`/interviewlist`);
+
+      axios.put(`/interview/${interviewID}/updateStatus`);
 
       setFormData({
         details: {
@@ -134,10 +137,7 @@ const AddFeedback = () => {
           </h2>
         </div>
 
-
-        
-         <form className="space-y-6  mx-96" onSubmit={handleSubmit}>
-         
+        <form className="space-y-6  mx-96" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="feedbackdate"

@@ -27,12 +27,15 @@ import CandidateList from "../components/CandidateList";
 import UpdateFeedbackHR from "../pages/feedback/UpdateFeedbackHR";
 import CandidateInterviewsList from "../components/candidateInterviewList";
 
+import InterviewsList from "../components/interviewsList";
+
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
 
 const Layout = () => {
-
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("token")
+  );
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -57,7 +60,10 @@ const Layout = () => {
               <Route path="/" element={<Home />} />
               <Route path="/api/register" element={<Register />} />
               <Route path="/api/login" element={<Login />} />
-              <Route path="/api/logout" element={<Logout setIsAuthenticated={setIsAuthenticated}/>} />
+              <Route
+                path="/api/logout"
+                element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+              />
               <Route path="/api/admin" element={<Admin />} />
               <Route path="/api/interviewer" element={<Interviewer />} />
               <Route path="/api/hr_person" element={<HrPerson />} />
@@ -106,6 +112,8 @@ const Layout = () => {
                 path="/feedback/candidates/:candidateID"
                 element={<CandidateInterviewsList />}
               />
+
+              <Route path="/interviewlist" element={<InterviewsList />} />
             </Routes>
           </div>
         </div>
