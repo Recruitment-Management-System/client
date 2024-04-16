@@ -133,7 +133,7 @@ const InterviewsList = () => {
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                  className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider"
                 >
                   Action
                 </th>
@@ -141,18 +141,14 @@ const InterviewsList = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredInterviews.map((interview) => (
-                <tr key={interview.interviewid}>
+                <tr key={interview.interviewID}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {interview.interviewid}
+                    {interview.interviewID}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewType}
 
-                    {interview.interviewType === 2
-                      ? "Technical"
-                      : interview.interviewType == 1
-                      ? "HR"
-                      : interview.interviewType}
+                   
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewStatus}
@@ -165,43 +161,42 @@ const InterviewsList = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
-                      to={`/candidate-information/${interview.interviewid}`}
+                      to={`/candidate-information/${interview.interviewID}`}
                       className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                     >
                       CANDIDATES
                     </Link>
-                  </td>
-                  <td>
-                    {(interview.interviewStatus === 1 ||
-                      interview.interviewStatus === 3) &&
-                    interview.interviewType === 2 ? (
+           
+                    {(interview.interviewStatus === "PENDING" ||
+                      interview.interviewStatus === "HAPPENING") &&
+                    interview.interviewType === "TECHNICAL" ? (
                       <Link
                         to={`/feedback/savefeedback/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
                       </Link>
-                    ) : (interview.interviewStatus === 1 ||
-                        interview.interviewStatus === 3) &&
-                      interview.interviewType === 1 ? (
+                    ) : (interview.interviewStatus === "PENDING" ||
+                        interview.interviewStatus === "HAPPENING") &&
+                      interview.interviewType === "HR" ? (
                       <Link
-                        to={`/feedback/savefeedbackhr/${interview.interviewid}`}
+                        to={`/feedback/savefeedbackhr/${interview.interviewID}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
                       </Link>
-                    ) : interview.interviewStatus === 2 &&
-                      interview.interviewType === 1 ? (
+                    ) : interview.interviewStatus === "ENDED" &&
+                      interview.interviewType === "HR" ? (
                       <Link
-                        to={`/feedback/viewfeedbackhr/${interview.interviewid}`}
+                        to={`/feedback/viewfeedbackhr/${interview.interviewID}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK
                       </Link>
-                    ) : interview.interviewStatus === 2 &&
-                    interview.interviewType === 2 ?(
+                    ) : interview.interviewStatus === "ENDED" &&
+                    interview.interviewType === "TECHNICAL" ?(
                       <Link
-                        to={`/feedback/viewfeedbackin/${interview.interviewid}`}
+                        to={`/feedback/viewfeedbackin/${interview.interviewID}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK

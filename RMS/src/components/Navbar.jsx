@@ -6,11 +6,12 @@ import PmNavbar from "./PmNavbar";
 import HrNavbar from "./HrNavbar";
 import UserNavbar from "./UserNavbar";
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated }) => {
   const [navbarComponent, setNavbarComponent] = useState(<UserNavbar />);
-  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    if (token) {
+    const token = localStorage.getItem("token");
+    if (isAuthenticated && token) {
       const decodeToken = jwtDecode(token);
       const role = decodeToken.role;
 
@@ -30,8 +31,10 @@ const Navbar = () => {
         default:
           break;
       }
+    } else {
+      setNavbarComponent(<UserNavbar />);
     }
-  }, [token]);
+  }, [isAuthenticated]);
 
   return <div className="text-white font-bold">{navbarComponent}</div>;
 };
