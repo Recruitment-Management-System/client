@@ -73,13 +73,13 @@ function Interview() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/update-interview/${interview.interviewID}`}
+                    to={`/api/update-interview/${interview.interviewID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     Edit
                   </Link>
                   <Link
-                    to={`/interview-details/${interview.interviewID}`}
+                    to={`/api/interview-details/${interview.interviewID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     Details

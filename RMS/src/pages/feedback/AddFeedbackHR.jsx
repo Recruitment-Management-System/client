@@ -51,6 +51,8 @@ const AddFeedbackHR = () => {
       alert("Feedback sent successfully");
       navigate(`/interviewlist`);
 
+      axios.put(`/interview/${interviewID}/updateStatus`);
+
       setFormData({
         feedbackdate: "",
         salaryexpectation: "",
