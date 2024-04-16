@@ -81,7 +81,7 @@ const Layout = () => {
               <Route path="/projects/:projectId" element={<VacancyTable />} />
 
               <Route path="/vacancies" element={<Vacancy />} />
-              <Route path="/add/:vacancyID" element={<AddCandidate />} />
+              <Route path="/add" element={<AddCandidate />} />
               <Route path="/abc/:vacancyID" element={<Candidates />} />
 
               <Route
