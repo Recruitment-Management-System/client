@@ -36,6 +36,7 @@ import InterviewsList from "../components/interviewsList";
 import CandidateInfoPage from "../components/candidateInformation";
 import Unauthorized from "../components/Unauthorized";
 import { jwtDecode } from "jwt-decode";
+import AllInterviews from "../components/AllInterviews";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -107,6 +108,7 @@ const Layout = () => {
                 path="/api/hr_person/candidate-details/:candidateID"
                 element={<CandidateDetails />}
               />
+              <Route path="/api/allInterviewsHRView" element={<AllInterviews/>}/>
               {/* <Route
                 path="/api/hr_person/feedback/update/:feedbackhrid"
                 element={<UpdateFeedbackHR />}
