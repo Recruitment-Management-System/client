@@ -159,7 +159,12 @@ function Vacancy() {
                   >
                     CANDIDATES
                   </Link>
-                  <Link className="text-red-600 hover:text-red-900 font-bold">
+
+                 <Link
+                    className="text-red-600 hover:text-red-900 font-bold"
+                    to={`/add/${vacancy.vacancyID}`}
+                  >
+
                     ADD CANDIDATE
                   </Link>
                 </td>
