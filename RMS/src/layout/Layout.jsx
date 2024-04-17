@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Register from "../components/register";
 import Home from "../pages/Home";
 import Admin from "../pages/Admin";
@@ -18,6 +23,8 @@ import Logout from "../components/Logout";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Candidates from "../components/Candidates";
+import CandidateDetails from "../components/CandidateDetails";
+import AddInterview from "../components/AddInterview";
 
 import AddFeedback from "../pages/feedback/AddFeedback";
 import ViewFeedbackInterviewer from "../pages/feedback/ViewFeedbackInterviewer";
@@ -29,11 +36,14 @@ import CandidateInterviewsList from "../components/candidateInterviewList";
 
 import InterviewsList from "../components/interviewsList";
 import CandidateInfoPage from "../components/candidateInformation";
+import Unauthorized from "../components/Unauthorized";
+import { jwtDecode } from "jwt-decode";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
 
 const Layout = () => {
+  const [role, setRole] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem("token")
   );
@@ -42,6 +52,8 @@ const Layout = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
+      const decodeToken = jwtDecode(token);
+      setRole(decodeToken.role);
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } else {
       delete axios.defaults.headers.common["Authorization"];
@@ -58,6 +70,7 @@ const Layout = () => {
           <div className="w-1/6"></div> {/* Empty space for the side navbar */}
           <div className="w-5/6 bg-white">
             <Routes>
+              {/* authentication routes */}
               <Route path="/" element={<Home />} />
               <Route path="/api/register" element={<Register />} />
               <Route path="/api/login" element={<Login />} />
@@ -65,58 +78,113 @@ const Layout = () => {
                 path="/api/logout"
                 element={<Logout setIsAuthenticated={setIsAuthenticated} />}
               />
-              <Route path="/api/admin" element={<Admin />} />
-              <Route path="/api/interviewer" element={<Interviewer />} />
-              <Route path="/api/hr_person" element={<HrPerson />} />
-              <Route path="/api/project_manager" element={<ProjectManager />} />
+
+              {/* HR routes */}
 
               <Route
-                path="/create-vacancy/:projectID"
-                element={<CreateVacancy />}
+                path="/api/hr_person/vacancies"
+                element={role === "HR_PERSON" ? <Vacancy /> : <Unauthorized />}
               />
               <Route
-                path="/update-vacancy/:vacancyID"
-                element={<UpdateVacancy />}
-              />
-              <Route path="/projects" element={<Project />} />
-              <Route path="/projects/:projectId" element={<VacancyTable />} />
-
-              <Route path="/vacancies" element={<Vacancy />} />
-              <Route path="/add" element={<AddCandidate />} />
-              <Route path="/abc/:vacancyID" element={<Candidates />} />
-
-              <Route
-                path="/feedback/savefeedback/:interviewID"
-                element={<AddFeedback />}
+                path="/api/hr_person/add/:vacancyID"
+                element={
+                  role === "HR_PERSON" ? <AddCandidate /> : <Unauthorized />
+                }
               />
               <Route
-                path="/feedback/savefeedbackhr/:interviewID"
-                element={<AddFeedbackHR />}
+                path="/api/hr_person/candidates/:vacancyID"
+                element={
+                  role === "HR_PERSON" ? <Candidates /> : <Unauthorized />
+                }
               />
               <Route
-                path="/feedback/viewfeedbackin/:interviewid"
-                element={<ViewFeedbackInterviewer />}
+                path="/api/hr_person/add-interview/:candidateID"
+                element={<AddInterview />}
               />
               <Route
-                path="/feedback/viewfeedbackhr/:interviewid"
-                element={<ViewFeedbackHR />}
+                path="/api/hr_person/candidate-details/:candidateID"
+                element={<CandidateDetails />}
               />
               <Route
-                path="/candidatelist/:vacancyid"
-                element={<CandidateList />}
-              />
-              <Route
-                path="/feedback/update/:feedbackhrid"
+                path="/api/hr_person/feedback/update/:feedbackhrid"
                 element={<UpdateFeedbackHR />}
               />
+
               <Route
-                path="/feedback/candidates/:candidateID"
+                path="/api/hr_person/feedback/savefeedbackhr/:interviewID"
+                element={<AddFeedbackHR />}
+              />
+
+              <Route
+                path="/api/hr_person/feedback/viewfeedbackhr/:interviewid"
+                element={<ViewFeedbackHR />}
+              />
+
+              {/* PM routes */}
+
+              <Route
+                path="/api/project_manager/create-vacancy/:projectID"
+                element={<CreateVacancy />}
+              />
+
+              <Route
+                path="/api/project_manager/update-vacancy/:vacancyID"
+                element={<UpdateVacancy />}
+              />
+
+              <Route
+                path="/api/project_manager/projects/:projectId"
+                element={<VacancyTable />}
+              />
+
+              <Route
+                path="/api/project_manager/projects"
+                element={<Project />}
+                //project id eken pmge project display karana
+              />
+              <Route
+                path="/api/project_manager/candidatelist/:vacancyid"
+                element={<CandidateList />}
+              />
+
+              {/* <Route path="/api/admin" element={<Admin />} /> */}
+              {/* <Route path="/api/interviewer" element={<Interviewer />} />
+              <Route path="/api/project_manager" element={<ProjectManager />} /> */}
+
+              {/* <Route path="/api/vacancies" element={<Vacancy />} /> */}
+              {/* <Route
+                path="/api/candidates/:vacancyID"
+                element={<Candidates />}
+              /> */}
+              {/* <Route path="/api/add/:vacancyID" element={<AddCandidate />} /> */}
+              {/* <Route path="/api/abc/:vacancyID" element={<Candidates />} /> */}
+
+              {/* Interviewer routes */}
+
+              <Route
+                path="/api/interviewer/feedback/savefeedback/:interviewID"
+                element={<AddFeedback />}
+              />
+
+              <Route
+                path="/api/interviewer/feedback/viewfeedbackin/:interviewid"
+                element={<ViewFeedbackInterviewer />}
+              />
+
+              <Route
+                path="/api/interviewer/feedback/candidates/:candidateID"
                 element={<CandidateInterviewsList />}
               />
 
-              <Route path="/interviewlist/:userId" element={<InterviewsList />} />
+              <Route
+                path="/api/interviewer/interviewlist/:userId"
+                element={<InterviewsList />}
+              />
 
-              <Route path="/candidate-information/:id" element={<CandidateInfoPage />}/>
+              <Route
+                path="/api/interviewer/candidate-information/:id"
+                element={<CandidateInfoPage />}
+              />
             </Routes>
           </div>
         </div>

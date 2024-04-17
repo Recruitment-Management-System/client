@@ -118,7 +118,7 @@ const CandidateInterviewsList = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/candidate-information/${interview.interviewid}`}
+                    to={`/api/candidate-information/${interview.interviewid}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     CANDIDATES
@@ -128,7 +128,7 @@ const CandidateInterviewsList = () => {
                   {interview.interviewStatus === 2 &&
                   interview.interviewType === 1 ? (
                     <Link
-                      to={`/feedback/viewfeedbackhr/${interview.interviewid}`}
+                      to={`/api/feedback/viewfeedbackhr/${interview.interviewid}`}
                       className="text-red-600 hover:text-red-900 font-bold"
                     >
                       VIEW FEEDBACK
@@ -136,7 +136,7 @@ const CandidateInterviewsList = () => {
                   ) : interview.interviewStatus === 2 &&
                     interview.interviewType === 2 ? (
                     <Link
-                      to={`/feedback/viewfeedbackin/${interview.interviewid}`}
+                      to={`/api/feedback/viewfeedbackin/${interview.interviewid}`}
                       className="text-red-600 hover:text-red-900 font-bold"
                     >
                       VIEW FEEDBACK
