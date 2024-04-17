@@ -137,77 +137,81 @@ const AddFeedback = () => {
           </h2>
         </div>
 
-        <form className="space-y-6  mx-96" onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="feedbackdate"
-              className="block text-sm font-medium leading-6 text-white"
-            >
-              Date
-            </label>
-            <div className="mt-2">
-              <input
-                id="feedbackdate"
-                name="feedbackdate"
-                required
-                value={formData.feedbackdate}
-                onChange={handleChange}
-                type="date"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
 
-          <div>
-            <label
-              htmlFor="overallrating"
-              className="block text-sm font-medium leading-6 text-white"
-            >
-              Overall Rating
-            </label>
-            <div className="mt-2">
-              <select
-                id="overallrating"
-                name="overallrating"
-                required
-                value={formData.overallrating}
-                onChange={handleChange}
-                className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        <form className="space-y-12" onSubmit={handleSubmit}>
+          <div className="w-3/6 mx-auto">
+            <div>
+              <label
+                htmlFor="feedbackdate"
+                className="block text-sm font-medium leading-6 text-white"
               >
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
+                Date
+              </label>
+              <div className="mt-2">
+                <input
+                  id="feedbackdate"
+                  name="feedbackdate"
+                  required
+                  value={formData.feedbackdate}
+                  onChange={handleChange}
+                  type="date"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+
+            </div>
+
+            <div>
+              <label
+                htmlFor="overallrating"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+                Overall Rating
+              </label>
+              <div className="mt-2">
+                <select
+                  id="overallrating"
+                  name="overallrating"
+                  required
+                  value={formData.overallrating}
+                  onChange={handleChange}
+                  className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                >
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="secondinterview"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+                Second Interview Need:
+              </label>
+              <div className="mt-2">
+                <input
+                  id="secondinterview"
+                  name="secondinterview"
+                  required
+                  type="checkbox"
+                  checked={formData.secondinterview}
+                  onChange={handleChange}
+                  className="form-checkbox h-5 w-5 text-indigo-600 transition duration-150 ease-in-out"
+                />
+              </div>
             </div>
           </div>
 
-          <div>
-            <label
-              htmlFor="secondinterview"
-              className="block text-sm font-medium leading-6 text-white"
-            >
-              Second Interview Need:
-            </label>
-            <div className="mt-2">
-              <input
-                id="secondinterview"
-                name="secondinterview"
-                required
-                type="checkbox"
-                checked={formData.secondinterview}
-                onChange={handleChange}
-                className="form-checkbox h-5 w-5 text-indigo-600 transition duration-150 ease-in-out"
-              />
-            </div>
-          </div>
+          <h2 className="text-white text-center text-lg"> Feedback </h2>
 
-          <h2 className="text-white"> Feedback </h2>
-
-          <div>
-            <table className="table-auto text-white border">
+          <div className="w-9/12 mx-auto">
+            <table className="table-auto text-white border ">
               <thead>
                 <tr>
                   <th className="w-2/6 border">Category</th>
@@ -648,7 +652,7 @@ const AddFeedback = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-button px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-3/6 mx-auto justify-center rounded-md bg-button px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Add Feedback
             </button>
