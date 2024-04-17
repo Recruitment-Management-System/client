@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function AddCandidate() {
-  const { vacancyID } = useParams(); // Use useParams to access route parameter
+  const { vacancyID } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -13,21 +13,39 @@ export default function AddCandidate() {
     experience: "",
     qualification: "",
     description: "",
+    cv: null,
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "cv") {
+      setFormData({ ...formData, cv: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    
+    const formDataWithCV = new FormData();
+    formDataWithCV.append("nic", formData.nic);
+    formDataWithCV.append("firstname", formData.firstname);
+    formDataWithCV.append("lastname", formData.lastname);
+    formDataWithCV.append("experience", formData.experience);
+    formDataWithCV.append("qualification", formData.qualification);
+    formDataWithCV.append("description", formData.description);
+    formDataWithCV.append("cv", formData.cv);
+
     try {
       await axios.post(
-        `http://localhost:8080/api/vacancies/addcandidate/${vacancyID}`,
-        formData
+       `/candidate/add_candidate?file=${encodeURIComponent(formData.cv.name)}`,
+        formDataWithCV,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
-      // Redirect to project page or any other page after successful submission
       navigate(`/vacancies`);
     } catch (error) {
       console.error("Error adding candidate:", error);
@@ -40,7 +58,7 @@ export default function AddCandidate() {
       <h2 className="text-2xl font-bold leading-9 tracking-tight text-white mb-8">
         Add a Candidate
       </h2>
-      <form className="space-y-6" onSubmit={handleSubmit}>
+      <form className="space-y-6" onSubmit={handleSubmit} enctype="multipart/form-data">
         <div className="flex space-x-4">
           <div className="w-1/2">
             <label
@@ -151,6 +169,23 @@ export default function AddCandidate() {
             autoComplete="description"
             required
             value={formData.description}
+            onChange={handleChange}
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
+
+        <div className="w-full">
+          <label
+            htmlFor="cv"
+            className="block text-sm font-medium leading-6 text-white"
+          >
+            Upload your CV
+          </label>
+          <input
+            id="cv"
+            name="cv"
+            type="file"
+            accept=".pdf,.doc,.docx,.txt"
             onChange={handleChange}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
