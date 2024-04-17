@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import logo from "../assets/logo.jpg";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function UpdateVacancy() {
   const { vacancyID } = useParams(); // Get vacancyId from URL params
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     jobRole: "",
     jobRefCode: "",
@@ -53,6 +53,7 @@ export default function UpdateVacancy() {
       await axios.put(`/vacancies/update/${vacancyID}`, formData);
 
       alert("Vacancy updated successfully!");
+      navigate("/api/project_manager/projects")
       // Redirect to previous page or any other page after successful update
     } catch (error) {
       console.error("Error updating vacancy:", error);

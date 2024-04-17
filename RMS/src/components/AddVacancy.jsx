@@ -24,7 +24,7 @@ export default function CreateVacancy(props) {
         e.preventDefault();
         try {
             await axios.post(`/vacancies/${projectID}/add`, formData);
-            navigate(`/projects/${projectID}`);
+            navigate(`/api/project_manager/projects/${projectID}`);
         } catch (error) {
             console.error('Error creating vacancy:', error);
             alert('Failed to create vacancy. Please try again later.');
