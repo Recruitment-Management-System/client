@@ -26,7 +26,7 @@ export default function AddCandidate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formDataWithCV = new FormData();
     formDataWithCV.append("nic", formData.nic);
     formDataWithCV.append("firstname", formData.firstname);
@@ -34,11 +34,11 @@ export default function AddCandidate() {
     formDataWithCV.append("experience", formData.experience);
     formDataWithCV.append("qualification", formData.qualification);
     formDataWithCV.append("description", formData.description);
-    formDataWithCV.append("cv", formData.cv);
+    formDataWithCV.append("file", formData.cv);
 
     try {
       await axios.post(
-       `/candidate/add_candidate?file=${encodeURIComponent(formData.cv.name)}`,
+        `/candidate/add_candidate/${vacancyID}`,
         formDataWithCV,
         {
           headers: {
@@ -58,7 +58,11 @@ export default function AddCandidate() {
       <h2 className="text-2xl font-bold leading-9 tracking-tight text-white mb-8">
         Add a Candidate
       </h2>
-      <form className="space-y-6" onSubmit={handleSubmit} enctype="multipart/form-data">
+      <form
+        className="space-y-6"
+        onSubmit={handleSubmit}
+        enctype="multipart/form-data"
+      >
         <div className="flex space-x-4">
           <div className="w-1/2">
             <label

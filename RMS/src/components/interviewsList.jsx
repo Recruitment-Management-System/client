@@ -141,14 +141,12 @@ const InterviewsList = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredInterviews.map((interview) => (
-                <tr key={interview.interviewID}>
+                <tr key={interview.interviewid}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {interview.interviewID}
+                    {interview.interviewid}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewType}
-
-                   
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewStatus}
@@ -161,17 +159,17 @@ const InterviewsList = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
-                      to={`/candidate-information/${interview.interviewID}`}
+                      to={`/api/candidate-information/${interview.interviewid}`}
                       className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                     >
                       CANDIDATES
                     </Link>
-           
+
                     {(interview.interviewStatus === "PENDING" ||
                       interview.interviewStatus === "HAPPENING") &&
                     interview.interviewType === "TECHNICAL" ? (
                       <Link
-                        to={`/feedback/savefeedback/${interview.interviewid}`}
+                        to={`/api/feedback/savefeedback/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
@@ -180,7 +178,7 @@ const InterviewsList = () => {
                         interview.interviewStatus === "HAPPENING") &&
                       interview.interviewType === "HR" ? (
                       <Link
-                        to={`/feedback/savefeedbackhr/${interview.interviewID}`}
+                        to={`/api/feedback/savefeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
@@ -188,20 +186,20 @@ const InterviewsList = () => {
                     ) : interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "HR" ? (
                       <Link
-                        to={`/feedback/viewfeedbackhr/${interview.interviewID}`}
+                        to={`/api/feedback/viewfeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK
                       </Link>
                     ) : interview.interviewStatus === "ENDED" &&
-                    interview.interviewType === "TECHNICAL" ?(
+                      interview.interviewType === "TECHNICAL" ? (
                       <Link
-                        to={`/feedback/viewfeedbackin/${interview.interviewID}`}
+                        to={`/api/feedback/viewfeedbackin/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK
                       </Link>
-                    ): null}
+                    ) : null}
                   </td>
                 </tr>
               ))}

@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 
 function VacancyTable() {
   const [vacancies, setVacancies] = useState([]);
@@ -21,9 +19,7 @@ function VacancyTable() {
         setVacancies(response.data);
         setFilteredVacancies(response.data); // Initially set filtered vacancies to all vacancies
       } catch (error) {
-
         console.error("Error fetching vacancies:", error);
-
       }
     };
 
@@ -58,9 +54,7 @@ function VacancyTable() {
 
   // Filter vacancies by job role based on search term
   useEffect(() => {
-
     const filtered = vacancies.filter((vacancy) =>
-
       vacancy.jobRole.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredVacancies(filtered);
@@ -92,10 +86,9 @@ function VacancyTable() {
         </div>
 
         <Link
-          to={`/create-vacancy/${projectId}`}
+          to={`/api/create-vacancy/${projectId}`}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-
           Create Vacancy
         </Link>
       </div>
@@ -147,7 +140,6 @@ function VacancyTable() {
               >
                 Actions
               </th>
-
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -156,7 +148,7 @@ function VacancyTable() {
             {filteredVacancies.map((vacancy) => (
               <tr key={vacancy.vacancyID}>
                 {/* Table data */}
-                <Link to={`/candidatelist/${vacancy.vacancyID}`}>
+                <Link to={`/api/candidatelist/${vacancy.vacancyID}`}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {vacancy.vacancyID}
                   </td>
@@ -178,7 +170,7 @@ function VacancyTable() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/update-vacancy/${vacancy.vacancyID}`}
+                    to={`/api/update-vacancy/${vacancy.vacancyID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     EDIT
@@ -186,7 +178,6 @@ function VacancyTable() {
                   <Link className="text-red-600 hover:text-red-900 font-bold">
                     CLOSE
                   </Link>
-
                 </td>
               </tr>
             ))}

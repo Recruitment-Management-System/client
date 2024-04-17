@@ -46,6 +46,7 @@ export default function Register() {
         // const tokenDetails = JSON.stringify(decodeToken);
         const role = decodeToken.role.toLowerCase();
         navigate(`/api/${role}`, { replace: true });
+        window.location.reload();
       }
 
       Swal.fire({
