@@ -25,7 +25,6 @@ import Navbar from "../components/Navbar";
 import Candidates from "../components/Candidates";
 import CandidateDetails from "../components/CandidateDetails";
 import AddInterview from "../components/AddInterview";
-
 import AddFeedback from "../pages/feedback/AddFeedback";
 import ViewFeedbackInterviewer from "../pages/feedback/ViewFeedbackInterviewer";
 import ViewFeedbackHR from "../pages/feedback/ViewFeedbackHR";
@@ -33,7 +32,6 @@ import AddFeedbackHR from "../pages/feedback/AddFeedbackHR";
 import CandidateList from "../components/CandidateList";
 import UpdateFeedbackHR from "../pages/feedback/UpdateFeedbackHR";
 import CandidateInterviewsList from "../components/candidateInterviewList";
-
 import InterviewsList from "../components/interviewsList";
 import CandidateInfoPage from "../components/candidateInformation";
 import Unauthorized from "../components/Unauthorized";
@@ -82,6 +80,10 @@ const Layout = () => {
               {/* HR routes */}
 
               <Route
+                path="/api/hr_person"
+                element={role === "HR_PERSON" ? <HrPerson /> : <Unauthorized />}
+              />
+              <Route
                 path="/api/hr_person/vacancies"
                 element={role === "HR_PERSON" ? <Vacancy /> : <Unauthorized />}
               />
@@ -105,10 +107,10 @@ const Layout = () => {
                 path="/api/hr_person/candidate-details/:candidateID"
                 element={<CandidateDetails />}
               />
-              <Route
+              {/* <Route
                 path="/api/hr_person/feedback/update/:feedbackhrid"
                 element={<UpdateFeedbackHR />}
-              />
+              /> */}
 
               <Route
                 path="/api/hr_person/feedback/savefeedbackhr/:interviewID"
@@ -121,6 +123,17 @@ const Layout = () => {
               />
 
               {/* PM routes */}
+
+              <Route
+                path="/api/project_manager"
+                element={
+                  role === "PROJECT_MANAGER" ? (
+                    <ProjectManager />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
+              />
 
               <Route
                 path="/api/project_manager/create-vacancy/:projectID"
@@ -160,6 +173,13 @@ const Layout = () => {
               {/* <Route path="/api/abc/:vacancyID" element={<Candidates />} /> */}
 
               {/* Interviewer routes */}
+
+              <Route
+                path="/api/interviewer"
+                element={
+                  role === "INTERVIEWER" ? <Interviewer /> : <Unauthorized />
+                }
+              />
 
               <Route
                 path="/api/interviewer/feedback/savefeedback/:interviewID"
