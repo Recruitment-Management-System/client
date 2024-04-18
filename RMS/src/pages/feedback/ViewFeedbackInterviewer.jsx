@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Table from "../../components/FeedbackViewTable";
+import {fetchCandidateIDByInterviewID} from "../../components/fetchCandidateIdByInterviewId"
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -19,6 +19,17 @@ const ViewFeedbackInterviewer = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  //get candidate id of the interview
+  const getCandidateIDFromInterview = async (interviewID) => {
+    try {
+      const candidateID = await fetchCandidateIDByInterviewID(interviewID);
+      return candidateID;
+    } catch (error) {
+      console.error("Error fetching candidateID:", error);
+      return null;
+    }
+  };
 
   return (
     <>
@@ -65,7 +76,13 @@ const ViewFeedbackInterviewer = () => {
                         {feedback.overallrating}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {feedback.secondinterview ? "Yes" : "No"}
+                        {feedback.secondinterview ? (
+                          <a href={`api/hr_person/candidate-details/${ getCandidateIDFromInterview(feedback.interviewID)}`}>Yes</a>
+                        ) : feedback.secondinterview === false ? (
+                          "No"
+                        ) : (
+                          "Yes"
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {new Date(feedback.feedbackdate).toLocaleDateString()}

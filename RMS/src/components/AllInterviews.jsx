@@ -3,7 +3,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 
-const InterviewsList = () => {
+const AllInterviews = () => {
   const [interviews, setInterviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterOption, setFilterOption] = useState("all");
@@ -13,16 +13,8 @@ const InterviewsList = () => {
     // Function to fetch interviews based on user ID
     const fetchInterviews = async () => {
       try {
-        // Fetch JWT token from local storage
-        const token = localStorage.getItem("token");
 
-        // Decode JWT token to extract user ID
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.id;
-
-        // Fetch interviews relevant to the user ID
-
-        const response = await axios.get(`/interview/interviews/${userId}`);
+        const response = await axios.get('/interview/all_interviews');
 
         if (response.status === 200) {
           setInterviews(response.data);
@@ -165,25 +157,7 @@ const InterviewsList = () => {
                       CANDIDATES
                     </Link>
 
-                    {(interview.interviewStatus === "PENDING" ||
-                      interview.interviewStatus === "HAPPENING") &&
-                    interview.interviewType === "TECHNICAL" ? (
-                      <Link
-                        to={`/api/interviewer/feedback/savefeedback/${interview.interviewid}`}
-                        className="text-red-600 hover:text-red-900 font-bold"
-                      >
-                        ADD FEEDBACK
-                      </Link>
-                    ) : (interview.interviewStatus === "PENDING" ||
-                        interview.interviewStatus === "HAPPENING") &&
-                      interview.interviewType === "HR" ? (
-                      <Link
-                        to={`/api/interviewer/feedback/savefeedbackhr/${interview.interviewid}`}
-                        className="text-red-600 hover:text-red-900 font-bold"
-                      >
-                        ADD FEEDBACK
-                      </Link>
-                    ) : interview.interviewStatus === "ENDED" &&
+                    {interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "HR" ? (
                       <Link
                         to={`/api/interviewer/feedback/viewfeedbackhr/${interview.interviewid}`}
@@ -211,4 +185,4 @@ const InterviewsList = () => {
   );
 };
 
-export default InterviewsList;
+export default AllInterviews;
