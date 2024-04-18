@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 
 const AllInterviews = () => {
@@ -13,8 +12,7 @@ const AllInterviews = () => {
     // Function to fetch interviews based on user ID
     const fetchInterviews = async () => {
       try {
-
-        const response = await axios.get('/interview/all_interviews');
+        const response = await axios.get("/interview/all_interviews");
 
         if (response.status === 200) {
           setInterviews(response.data);
@@ -158,7 +156,7 @@ const AllInterviews = () => {
                     </Link>
 
                     {interview.interviewStatus === "ENDED" &&
-                      interview.interviewType === "HR" ? (
+                    interview.interviewType === "HR" ? (
                       <Link
                         to={`/api/interviewer/feedback/viewfeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"

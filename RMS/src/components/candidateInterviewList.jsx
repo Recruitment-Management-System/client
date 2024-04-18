@@ -122,7 +122,7 @@ const CandidateInterviewsList = () => {
                   {interview.interviewStatus === "ENDED" &&
                   interview.interviewType === "HR" ? (
                     <Link
-                      to={`/api/interviewer/feedback/viewfeedbackin/${interview.interviewid}`}
+                      to={`/api/interviewer/feedback/viewfeedbackhr/${interview.interviewid}`}
                       className="text-red-600 hover:text-red-900 font-bold"
                     >
                       VIEW FEEDBACK
