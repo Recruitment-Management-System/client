@@ -9,6 +9,8 @@ const AddFeedback = () => {
 
   const { interviewID } = useParams();
 
+  const {userId} = useParams();
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -110,7 +112,7 @@ const AddFeedback = () => {
         feedbackData
       );
       alert("Feedback sent successfully");
-      navigate(`/interviewlist`);
+      navigate(`/api/interviewer/interviewlist/${userId}`);
 
       axios.put(`/interview/${interviewID}/updateStatus`);
 
