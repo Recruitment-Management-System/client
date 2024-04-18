@@ -36,6 +36,7 @@ import InterviewsList from "../components/interviewsList";
 import CandidateInfoPage from "../components/candidateInformation";
 import Unauthorized from "../components/Unauthorized";
 import { jwtDecode } from "jwt-decode";
+import NotFoundPage from "../components/NotFoundPage";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -107,14 +108,20 @@ const Layout = () => {
                 path="/api/hr_person/candidate-details/:candidateID"
                 element={<CandidateDetails />}
               />
-              <Route
-                path="/api/hr_person/allInterviewsHRView"
-                element={<AllInterviews />}
-              />
               {/* <Route
                 path="/api/hr_person/feedback/update/:feedbackhrid"
                 element={<UpdateFeedbackHR />}
               /> */}
+
+              <Route
+                path="/api/hr_person/feedback/savefeedbackhr/:interviewID"
+                element={<AddFeedbackHR />}
+              />
+
+              <Route
+                path="/api/hr_person/feedback/viewfeedbackhr/:interviewid"
+                element={<ViewFeedbackHR />}
+              />
 
               {/* PM routes */}
 
@@ -152,11 +159,6 @@ const Layout = () => {
               <Route
                 path="/api/project_manager/candidatelist/:vacancyid"
                 element={<CandidateList />}
-              />
-
-              <Route
-                path="/api/project_manager/feedback/candidates/:candidateID"
-                element={<CandidateInterviewsList />}
               />
 
               {/* <Route path="/api/admin" element={<Admin />} /> */}
@@ -204,6 +206,8 @@ const Layout = () => {
                 path="/api/interviewer/candidate-information/:id"
                 element={<CandidateInfoPage />}
               />
+
+              <Route path="/api/notfound" element={<NotFoundPage />} />
             </Routes>
           </div>
         </div>
