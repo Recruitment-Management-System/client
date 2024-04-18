@@ -148,7 +148,7 @@ function VacancyTable() {
             {filteredVacancies.map((vacancy) => (
               <tr key={vacancy.vacancyID}>
                 {/* Table data */}
-                <Link to={`/api/candidatelist/${vacancy.vacancyID}`}>
+                <Link to={`/api/project_manager/candidatelist/${vacancy.vacancyID}`}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {vacancy.vacancyID}
                   </td>

@@ -169,7 +169,7 @@ const InterviewsList = () => {
                       interview.interviewStatus === "HAPPENING") &&
                     interview.interviewType === "TECHNICAL" ? (
                       <Link
-                        to={`/api/feedback/savefeedback/${interview.interviewid}`}
+                        to={`/api/interviewer/feedback/savefeedback/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
@@ -178,7 +178,7 @@ const InterviewsList = () => {
                         interview.interviewStatus === "HAPPENING") &&
                       interview.interviewType === "HR" ? (
                       <Link
-                        to={`/api/feedback/savefeedbackhr/${interview.interviewid}`}
+                        to={`/api/interviewer/feedback/savefeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         ADD FEEDBACK
@@ -186,7 +186,7 @@ const InterviewsList = () => {
                     ) : interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "HR" ? (
                       <Link
-                        to={`/api/feedback/viewfeedbackhr/${interview.interviewid}`}
+                        to={`/api/interviewer/feedback/viewfeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK
@@ -194,7 +194,7 @@ const InterviewsList = () => {
                     ) : interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "TECHNICAL" ? (
                       <Link
-                        to={`/api/feedback/viewfeedbackin/${interview.interviewid}`}
+                        to={`/api/interviewer/feedback/viewfeedbackin/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK

@@ -14,7 +14,7 @@ const AllInterviews = () => {
     const fetchInterviews = async () => {
       try {
 
-        const response = await axios.get(`/interview/interviews/all_interviews`);
+        const response = await axios.get('/interview/all_interviews');
 
         if (response.status === 200) {
           setInterviews(response.data);
@@ -160,7 +160,7 @@ const AllInterviews = () => {
                     {interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "HR" ? (
                       <Link
-                        to={`/api/feedback/viewfeedbackhr/${interview.interviewid}`}
+                        to={`/api/interviewer/feedback/viewfeedbackhr/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK
@@ -168,7 +168,7 @@ const AllInterviews = () => {
                     ) : interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "TECHNICAL" ? (
                       <Link
-                        to={`/api/feedback/viewfeedbackin/${interview.interviewid}`}
+                        to={`/api/interviewer/feedback/viewfeedbackin/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
                         VIEW FEEDBACK

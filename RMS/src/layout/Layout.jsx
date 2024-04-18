@@ -108,21 +108,14 @@ const Layout = () => {
                 path="/api/hr_person/candidate-details/:candidateID"
                 element={<CandidateDetails />}
               />
-              <Route path="/api/allInterviewsHRView" element={<AllInterviews/>}/>
+              <Route
+                path="/api/hr_person/allInterviewsHRView"
+                element={<AllInterviews />}
+              />
               {/* <Route
                 path="/api/hr_person/feedback/update/:feedbackhrid"
                 element={<UpdateFeedbackHR />}
               /> */}
-
-              <Route
-                path="/api/hr_person/feedback/savefeedbackhr/:interviewID"
-                element={<AddFeedbackHR />}
-              />
-
-              <Route
-                path="/api/hr_person/feedback/viewfeedbackhr/:interviewid"
-                element={<ViewFeedbackHR />}
-              />
 
               {/* PM routes */}
 
@@ -160,6 +153,11 @@ const Layout = () => {
               <Route
                 path="/api/project_manager/candidatelist/:vacancyid"
                 element={<CandidateList />}
+              />
+
+<Route
+                path="/api/project_manager/feedback/candidates/:candidateID"
+                element={<CandidateInterviewsList />}
               />
 
               {/* <Route path="/api/admin" element={<Admin />} /> */}
@@ -206,6 +204,16 @@ const Layout = () => {
               <Route
                 path="/api/interviewer/candidate-information/:id"
                 element={<CandidateInfoPage />}
+              />
+
+              <Route
+                path="/api/interviewer/feedback/savefeedbackhr/:interviewID"
+                element={<AddFeedbackHR />}
+              />
+
+              <Route
+                path="/api/interviewer/feedback/viewfeedbackhr/:interviewid"
+                element={<ViewFeedbackHR />}
               />
             </Routes>
           </div>
