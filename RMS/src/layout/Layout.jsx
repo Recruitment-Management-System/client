@@ -36,6 +36,7 @@ import InterviewsList from "../components/interviewsList";
 import CandidateInfoPage from "../components/candidateInformation";
 import Unauthorized from "../components/Unauthorized";
 import { jwtDecode } from "jwt-decode";
+import NotFoundPage from "../components/NotFoundPage";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -205,6 +206,8 @@ const Layout = () => {
                 path="/api/interviewer/candidate-information/:id"
                 element={<CandidateInfoPage />}
               />
+
+              <Route path="/api/notfound" element={<NotFoundPage />} />
             </Routes>
           </div>
         </div>

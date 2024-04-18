@@ -18,6 +18,8 @@ export default function UpdateVacancy() {
 
   });
 
+  const [notFound, setNotFound] = useState(false); // State for 404 redirect
+
   useEffect(() => {
     // Fetch existing data for vacancy to be updated
     const fetchVacancy = async () => {
@@ -25,22 +27,31 @@ export default function UpdateVacancy() {
         const response = await axios.get(`/vacancies/${vacancyID}`);
         const vacancyData = response.data;
         // Set the formData state with the existing vacancy data
-        setFormData({
-          jobRole: vacancyData.jobRole,
-          jobRefCode: vacancyData.jobRefCode,
-          openings: vacancyData.openings,
-          status: vacancyData.status,
-
-          reason: vacancyData.reason,
-        });
+        if (!vacancyData) {
+          setNotFound(true); // Set notFound state to true
+        } else {
+          // Set the formData state with the existing vacancy data
+          setFormData({
+            jobRole: vacancyData.jobRole,
+            jobRefCode: vacancyData.jobRefCode,
+            openings: vacancyData.openings,
+            status: vacancyData.status,
+            reason: vacancyData.reason,
+          });
+        }
       } catch (error) {
+      
         console.error("Error fetching vacancy data:", error);
-
+        setNotFound(true);
       }
     };
 
     fetchVacancy();
   }, [vacancyID]);
+
+  if (notFound) {
+    return navigate("/api/notfound");
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,10 +67,13 @@ export default function UpdateVacancy() {
       navigate("/api/project_manager/projects")
       // Redirect to previous page or any other page after successful update
     } catch (error) {
+     
       console.error("Error updating vacancy:", error);
       alert("Failed to update vacancy. Please try again later.");
 
     }
+
+   
   };
 
   return (
@@ -135,6 +149,7 @@ export default function UpdateVacancy() {
                   required
                   value={formData.openings} // Set value from formData state
                   onChange={handleChange}
+                  min="1"
                   className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -160,7 +175,7 @@ export default function UpdateVacancy() {
                   <option value="">Select Status</option>
                   <option value="OPEN">OPEN</option>
                   <option value="CLOSED">CLOSED</option>
-                  <option value="IN_PROGRESS">IN_PROGRESS</option>
+                  
                 </select>
               </div>
             </div>

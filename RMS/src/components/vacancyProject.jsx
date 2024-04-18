@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 
 function VacancyTable() {
   const [vacancies, setVacancies] = useState([]);
   const [filteredVacancies, setFilteredVacancies] = useState([]);
+  const navigate = useNavigate();
 
   const [filterOption, setFilterOption] = useState("all"); // Default filter option
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [notFound, setNotFound] = useState(false); // State for 404 redirect
 
   const { projectId } = useParams(); // Get projectId from URL params
 
@@ -20,6 +23,8 @@ function VacancyTable() {
         setFilteredVacancies(response.data); // Initially set filtered vacancies to all vacancies
       } catch (error) {
         console.error("Error fetching vacancies:", error);
+        // If project ID doesn't exist, set notFound to true
+        setNotFound(true);
       }
     };
 
@@ -31,34 +36,40 @@ function VacancyTable() {
     const option = event.target.value;
     setFilterOption(option);
 
-    // Filter vacancies based on the selected option
-
-    if (option === "open") {
-      const filtered = vacancies.filter((vacancy) => vacancy.status === "OPEN");
-      setFilteredVacancies(filtered);
-    } else if (option === "closed") {
-      const filtered = vacancies.filter(
-        (vacancy) => vacancy.status === "CLOSED"
-      );
-
-      setFilteredVacancies(filtered);
-    } else {
-      setFilteredVacancies(vacancies);
-    }
+    // Filter vacancies based on the selected option and search term
+    const filtered = filterVacancies(vacancies, option, searchTerm);
+    setFilteredVacancies(filtered);
   };
 
   // Function to handle search input change
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
+    const term = event.target.value;
+    setSearchTerm(term);
+
+    // Filter vacancies based on the selected option and search term
+    const filtered = filterVacancies(vacancies, filterOption, term);
+    setFilteredVacancies(filtered);
   };
 
-  // Filter vacancies by job role based on search term
-  useEffect(() => {
-    const filtered = vacancies.filter((vacancy) =>
-      vacancy.jobRole.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredVacancies(filtered);
-  }, [searchTerm, vacancies]);
+  // Function to filter vacancies based on option and search term
+  const filterVacancies = (vacancies, option, term) => {
+    return vacancies.filter((vacancy) => {
+      const matchesSearch = vacancy.jobRole.toLowerCase().includes(term.toLowerCase());
+      if (option === "all") {
+        return matchesSearch;
+      } else if (option === "open") {
+        return matchesSearch && vacancy.status === "OPEN";
+      } else if (option === "closed") {
+        return matchesSearch && vacancy.status === "CLOSED";
+      }
+      return true;
+    });
+  };
+
+  // Redirect to 404 page if project ID doesn't exist
+  if (notFound) {
+    return navigate("/api/notfound");
+  }
 
   return (
     <div className="bg-gray-200 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
@@ -189,3 +200,4 @@ function VacancyTable() {
 }
 
 export default VacancyTable;
+
