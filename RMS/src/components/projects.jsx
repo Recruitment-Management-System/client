@@ -36,7 +36,7 @@ export default function Project() {
           {projects.map((project) => (
             <Link
               key={project.projectID}
-              to={`/api/projects/${project.projectID}`}
+              to={`/api/project_manager/projects/${project.projectID}`}
             >
               <div className="bg-white p-4 rounded-lg shadow-md cursor-pointer">
                 <h3 className="text-lg font-semibold text-gray-800">

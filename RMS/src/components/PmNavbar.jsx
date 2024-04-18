@@ -7,11 +7,9 @@ const PmNavbar = () => {
       <div>
         <ul className="ml-5 pt-16 flex flex-col gap-5">
           <li className="text-xl hover:text-blue-500 duration-300">
-            <Link>View Vacancies</Link>
+            <Link to="/api/project_manager/projects">View Projects</Link>
           </li>
-          <li className="text-xl hover:text-blue-500 duration-300">
-            <Link>View Feedbacks</Link>
-          </li>
+         
         </ul>
       </div>
       <div className="absolute bottom-5 left-5">

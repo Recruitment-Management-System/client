@@ -100,12 +100,6 @@ const CandidateInterviewsList = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {interview.interviewType}
-
-                  {interview.interviewType === 2
-                    ? "Technical"
-                    : interview.interviewType == 1
-                    ? "HR"
-                    : interview.interviewType}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {interview.interviewStatus}
@@ -118,7 +112,7 @@ const CandidateInterviewsList = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/api/candidate-information/${interview.interviewid}`}
+                    to={`/api/interviewer/candidate-information/${interview.interviewid}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     CANDIDATES

@@ -8,7 +8,7 @@ const CandidateList = () => {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`vacancies/${vacancyid}/candidates`);
+      const response = await axios.get(`vacancies/candidates/${vacancyid}`);
       setCandidateList(response.data);
     } catch (error) {
       console.error("Error fetching candidateList:", error);
@@ -104,7 +104,7 @@ const CandidateList = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <Link
-                        to={`/api/feedback/candidates/${candidate.candidateID}`}
+                        to={`/api/interviewer/feedback/candidates/${candidate.candidateID}`}
                         className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                       >
                         View Feedbacks

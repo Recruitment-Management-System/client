@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import logo from "../assets/logo.jpg";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function UpdateVacancy() {
   const { vacancyID } = useParams(); // Get vacancyId from URL params
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     jobRole: "",
     jobRefCode: "",
@@ -53,6 +53,7 @@ export default function UpdateVacancy() {
       await axios.put(`/vacancies/update/${vacancyID}`, formData);
 
       alert("Vacancy updated successfully!");
+      navigate("/api/project_manager/projects")
       // Redirect to previous page or any other page after successful update
     } catch (error) {
       console.error("Error updating vacancy:", error);
@@ -71,8 +72,7 @@ export default function UpdateVacancy() {
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6 md:w-2/5 w-full mx-auto" onSubmit={handleSubmit}>
             <div>
 
               <label
@@ -91,7 +91,7 @@ export default function UpdateVacancy() {
                   required
                   value={formData.jobRole} // Set value from formData state
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -113,7 +113,7 @@ export default function UpdateVacancy() {
                   required
                   value={formData.jobRefCode} // Set value from formData state
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function UpdateVacancy() {
                   required
                   value={formData.openings} // Set value from formData state
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -155,7 +155,7 @@ export default function UpdateVacancy() {
                   required
                   value={formData.status} // Set value from formData state
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
                   <option value="">Select Status</option>
                   <option value="OPEN">OPEN</option>
@@ -182,7 +182,7 @@ export default function UpdateVacancy() {
                   required
                   value={formData.reason} // Set value from formData state
                   onChange={handleChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -196,7 +196,7 @@ export default function UpdateVacancy() {
             </div>
           </form>
         </div>
-      </div>
+     
     </div>
   );
 }
