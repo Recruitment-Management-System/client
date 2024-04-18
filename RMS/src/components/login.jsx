@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Example() {
   const navigate = useNavigate();
@@ -69,15 +69,15 @@ export default function Example() {
       <div className="bg-background">
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img className="mx-auto h-10 w-auto" src="/assets/logo.jpg" />
+          
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
               Sign in to your account
             </h2>
           </div>
 
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm h-screen">
             <form
-              className="space-y-6"
+              className="space-y-6 mx-auto "
               action="#"
               method="POST"
               onSubmit={handleSubmit}
@@ -110,14 +110,7 @@ export default function Example() {
                   >
                     Password
                   </label>
-                  <div className="text-sm">
-                    <a
-                      href="#"
-                      className="font-semibold text-white hover:text-white"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
+                 
                 </div>
                 <div className="mt-2">
                   <input
@@ -131,7 +124,7 @@ export default function Example() {
                   />
                 </div>
               </div>
-
+          
               <div>
                 <button
                   type="submit"
@@ -140,6 +133,12 @@ export default function Example() {
                   Sign in
                 </button>
               </div>
+              <div className="text-sm text-white text-center cursor-pointer">
+                   
+                   Don't have an Account?
+                   <span className="text-white"><Link to="/api/register"> Sign Up</Link></span>
+                 
+                </div>
             </form>
 
             <p className="mt-10 text-center text-sm text-gray-500"></p>

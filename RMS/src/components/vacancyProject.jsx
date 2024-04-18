@@ -86,7 +86,7 @@ function VacancyTable() {
         </div>
 
         <Link
-          to={`/api/create-vacancy/${projectId}`}
+          to={`/api/project_manager/create-vacancy/${projectId}`}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Create Vacancy
@@ -170,14 +170,14 @@ function VacancyTable() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
-                    to={`/api/update-vacancy/${vacancy.vacancyID}`}
+                    to={`/api/project_manager/update-vacancy/${vacancy.vacancyID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     EDIT
                   </Link>
-                  <Link className="text-red-600 hover:text-red-900 font-bold">
+                  {/* <Link className="text-red-600 hover:text-red-900 font-bold">
                     CLOSE
-                  </Link>
+                  </Link> */}
                 </td>
               </tr>
             ))}
