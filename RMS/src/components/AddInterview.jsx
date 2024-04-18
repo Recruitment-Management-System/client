@@ -68,6 +68,7 @@ export default function AddInterview() {
     console.log(formData);
     try {
       await axios.post(`/interview/interviewer/${candidateID}`, formData);
+      navigate('/api/hr_person/vacancies');
     } catch (error) {
       console.error("Error adding interview:", error);
       alert("Failed to create interview. Please try again later.");

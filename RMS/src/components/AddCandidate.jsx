@@ -46,7 +46,8 @@ export default function AddCandidate() {
           },
         }
       );
-      navigate(`/vacancies`);
+      alert("Candidate added successfully");
+      navigate('/api/hr_person/vacancies');
     } catch (error) {
       console.error("Error adding candidate:", error);
       alert("Failed to add candidate. Please try again later.");
