@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function ProjectsHR() {
   const [projects, setProjects] = useState([]);
@@ -54,6 +55,9 @@ export default function ProjectsHR() {
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Project Manager
               </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -64,6 +68,14 @@ export default function ProjectsHR() {
                 <td className="px-6 py-4 whitespace-nowrap">{project[0].projectName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{project[0].projectCode}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{project[1]}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <Link
+                    to={`/edit-project/${project[0].projectID}`}
+                    className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
+                  >
+                    Edit
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
