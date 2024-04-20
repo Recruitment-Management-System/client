@@ -9,11 +9,15 @@ const AddFeedback = () => {
 
   const { interviewID } = useParams();
 
-  const {userId} = useParams();
-
   const navigate = useNavigate();
 
+   //fetch interviewer id from the token
+   const token = localStorage.getItem("token");
+   const decodedToken = jwtDecode(token);
+   const userId = decodedToken.id;
+
   const [formData, setFormData] = useState({
+    userId:userId,
     details: {
       categoryMap: {},
     },
@@ -96,6 +100,7 @@ const AddFeedback = () => {
     };
 
     const feedbackData = {
+      userId:userId,
       details,
       overallrating: formData.overallrating,
       secondinterview: formData.secondinterview,
@@ -112,9 +117,9 @@ const AddFeedback = () => {
         feedbackData
       );
       alert("Feedback sent successfully");
-      navigate(`/api/interviewer/interviewlist/${userId}`);
+      navigate("/api/interviewer");
 
-      axios.put(`/interview/${interviewID}/updateStatus`);
+      axios.get(`/interview/updateInterviewStatus/${interviewID}`);
 
       setFormData({
         details: {
@@ -139,7 +144,6 @@ const AddFeedback = () => {
           </h2>
         </div>
 
-
         <form className="space-y-12" onSubmit={handleSubmit}>
           <div className="w-3/6 mx-auto">
             <div>
@@ -160,7 +164,6 @@ const AddFeedback = () => {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-
             </div>
 
             <div>
@@ -229,6 +232,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="eduScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -244,6 +248,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="eduExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -259,6 +264,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="eduComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -271,6 +277,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="expScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -286,6 +293,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="expExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -301,6 +309,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="expComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -313,6 +322,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="archiScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -328,6 +338,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="archiExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -343,6 +354,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="archiComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -358,6 +370,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="devScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -373,6 +386,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="devExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -388,6 +402,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="devComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -400,6 +415,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="conceptScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -415,6 +431,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="conceptExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -430,6 +447,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="conceptComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -444,6 +462,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="ssScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -459,6 +478,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="ssExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -474,6 +494,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="ssComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -486,6 +507,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="teamScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -501,6 +523,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="teamExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -516,6 +539,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="teamComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -528,6 +552,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="leadScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -543,6 +568,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="leadExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -558,6 +584,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="leadComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -570,6 +597,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="achScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -585,6 +613,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="achExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -600,6 +629,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="achComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -612,6 +642,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="cmmScore"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -627,6 +658,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <select
                         name="cmmExpected"
+                        required
                         className="px-3 w-full py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                       >
                         <option>0</option>
@@ -642,6 +674,7 @@ const AddFeedback = () => {
                     <div className="mt-2">
                       <input
                         name="cmmComment"
+                        required
                         type="text"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />

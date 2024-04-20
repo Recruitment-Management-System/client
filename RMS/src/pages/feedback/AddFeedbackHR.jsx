@@ -9,11 +9,16 @@ const AddFeedbackHR = () => {
 
   const { interviewID } = useParams();
 
-  const {userId} = useParams();
-
   const navigate = useNavigate();
 
+  //fetch interviewer id from the token
+  const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
+  const userId = decodedToken.id;
+
+
   const [formData, setFormData] = useState({
+    userId: userId,
     feedbackdate: "",
     salaryexpectation: "",
     comment: "",
@@ -36,6 +41,7 @@ const AddFeedbackHR = () => {
     e.preventDefault();
 
     const feedbackData = {
+      userId: userId,
       feedbackdate: formData.feedbackdate,
       salaryexpectation: formData.salaryexpectation,
       comment: formData.comment,
@@ -51,7 +57,7 @@ const AddFeedbackHR = () => {
         feedbackData
       );
       alert("Feedback sent successfully");
-      navigate(`/api/interviewer/interviewlist/${userId}`);
+      navigate('/api/interviewer');
 
       axios.put(`/interview/${interviewID}/updateStatus`);
 
