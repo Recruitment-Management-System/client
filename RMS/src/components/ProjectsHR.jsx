@@ -33,6 +33,13 @@ export default function ProjectsHR() {
     <div className="bg-gray-200 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold text-gray-800">Projects</h2>
+        {/* Button for creating a new project */}
+        <Link
+          to="/api/hr_person/addproject"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+        >
+          Create Project
+        </Link>
         {/* Search input */}
         <input
           type="text"
@@ -46,6 +53,9 @@ export default function ProjectsHR() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-800">
             <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                Project ID
+              </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Project Name
               </th>
@@ -65,12 +75,13 @@ export default function ProjectsHR() {
             {filteredProjects.map((project) => (
               <tr key={project[0].projectID}>
                 {/* Table data */}
+                <td className="px-6 py-4 whitespace-nowrap">{project[0].projectID}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{project[0].projectName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{project[0].projectCode}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{project[1]}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Link
-                    to={`/edit-project/${project[0].projectID}`}
+                    to={`/api/hr_person/updateproject/${project[0].projectID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     Edit

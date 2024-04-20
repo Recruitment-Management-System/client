@@ -47,7 +47,7 @@ export default function AddProject() {
   return (
     <div className="bg-background min-h-screen flex flex-col justify-center items-center">
       <h2 className="text-2xl font-bold leading-9 tracking-tight text-white mb-8">
-        Add Project for Project Managers
+        Add Project
       </h2>
       <form className="space-y-6">
         {/* Select project manager */}

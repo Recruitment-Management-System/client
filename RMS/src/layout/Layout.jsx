@@ -37,8 +37,9 @@ import CandidateInfoPage from "../components/candidateInformation";
 import Unauthorized from "../components/Unauthorized";
 import { jwtDecode } from "jwt-decode";
 import NotFoundPage from "../components/NotFoundPage";
-import AddProject from "../components/AddProjectManager";
+import AddProject from "../components/AddProject";
 import ProjectsHR from "../components/ProjectsHR";
+import UpdateProject from "../components/UpdateProject";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -210,8 +211,9 @@ const Layout = () => {
               />
 
               <Route path="/api/notfound" element={<NotFoundPage />} />
-              <Route path="/api/addproject" element={<AddProject />} />
+              <Route path="/api/hr_person/addproject" element={<AddProject />} />
               <Route path="/api/hr_person/projects" element={<ProjectsHR />} />
+              <Route path="/api/hr_person/updateproject/:projectID" element={<UpdateProject />} />
             </Routes>
           </div>
         </div>
