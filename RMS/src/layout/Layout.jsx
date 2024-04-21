@@ -37,6 +37,7 @@ import CandidateInfoPage from "../components/candidateInformation";
 import Unauthorized from "../components/Unauthorized";
 import { jwtDecode } from "jwt-decode";
 import AllInterviews from "../components/AllInterviews";
+import SecondInterviewList from "../components/SecondInterviewList";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -114,8 +115,8 @@ const Layout = () => {
                 element={<CandidateDetails />}
               />
               <Route
-                path="/api/hr_person/allInterviewsHRView"
-                element={<AllInterviews />}
+                path="/api/hr_person/secondinterviews"
+                element={<SecondInterviewList />}
               />
               {/* <Route
                 path="/api/hr_person/feedback/update/:feedbackhrid"

@@ -204,22 +204,25 @@ export default function AddCandidate() {
             />
           </div>
 
-          <div className="w-full">
-            <label
-              htmlFor="cv"
-              className="block text-sm font-medium leading-6 text-white"
-            >
-              Upload your CV
-            </label>
-            <input
-              id="cv"
-              name="cv"
-              type="file"
-              accept=".pdf,.doc,.docx,.txt"
-              onChange={handleChange}
-              className="block w-full rounded-md border-gray-300 shadow-sm h-8 focus:outline-none text-lg px-2"
-            />
-          </div>
+
+        <div className="w-full">
+          <label
+            htmlFor="cv"
+            className="block text-sm font-medium leading-6 text-white"
+          >
+            Upload your CV
+          </label>
+          <input
+            id="cv"
+            name="cv"
+            type="file"
+            accept=".pdf,.doc,.docx,.txt"
+            required
+            onChange={handleChange}
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
+
 
           <div className="w-full">
             <button

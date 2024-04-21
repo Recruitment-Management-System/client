@@ -76,13 +76,7 @@ const ViewFeedbackInterviewer = () => {
                         {feedback.overallrating}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {feedback.secondinterview ? (
-                          <a href={`api/hr_person/candidate-details/${ getCandidateIDFromInterview(feedback.interviewID)}`}>Yes</a>
-                        ) : feedback.secondinterview === false ? (
-                          "No"
-                        ) : (
-                          "Yes"
-                        )}
+                        {feedback.secondinterview ? "Yes" : "No"}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {new Date(feedback.feedbackdate).toLocaleDateString()}
