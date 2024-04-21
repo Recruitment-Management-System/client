@@ -11,27 +11,8 @@ export default function UpdateProject() {
   const [formData, setFormData] = useState({
     userID: "",
     projectName: "",
-    projectCode: ""
+    projectCode: "",
   });
-
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const response = await axios.get(`/projects/${projectID}`);
-        const projectData = response.data;
-
-        setFormData({
-          userID: projectData.userID,
-          projectName: projectData.projectName,
-          projectCode: projectData.projectCode
-        });
-      } catch (error) {
-        console.error("Error fetching project data:", error);
-      }
-    };
-
-    fetchProject();
-  }, [projectID]);
 
   useEffect(() => {
     const fetchProjectManagers = async () => {
@@ -46,23 +27,54 @@ export default function UpdateProject() {
     fetchProjectManagers();
   }, []);
 
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await axios.get(`/projects/${projectID}`);
+        const projectData = response.data;
+        // alert(projectData.users.id);
+
+      const projectManagerResponse = await axios.get(`/users/projectManager/${projectData.users.id}`);
+      const projectManagerData = projectManagerResponse.data;
+      // alert(projectManagerData.id)
+
+        setFormData({
+          userID: projectData.userID,
+          projectName: projectData.projectName,
+          projectCode: projectData.projectCode,
+          
+        }),
+        setSelectedProjectManager(`${projectData.users.id}`);
+        
+
+      } catch (error) {
+        console.error("Error fetching project data:", error);
+      }
+    };
+
+    fetchProject();
+  }, [projectID]);
+
+
+
   const handleUpdateProject = async () => {
     // if (selectedProjectManager && formData.projectName && formData.projectCode) {
-      try {
-        const projectData = {
-          project: {
-            projectName: formData.projectName,
-            projectCode: formData.projectCode
-          },
-          userID: parseInt(selectedProjectManager)
-        };
-        
-        await axios.put(`/projects/update/${projectID}`, projectData);
-        navigate('/api/hr_person/projects');
-      } catch (error) {
-        console.error("Error updating project:", error);
-        alert("Failed to update project. Please try again later.");
-      }
+    try {
+      const projectData = {
+        project: {
+          projectName: formData.projectName,
+          projectCode: formData.projectCode,
+        },
+        userID: parseInt(selectedProjectManager),
+      };
+
+      await axios.put(`/projects/update/${projectID}`, projectData);
+      navigate("/api/hr_person/projects");
+      setSelectedProjectManager("");
+    } catch (error) {
+      console.error("Error updating project:", error);
+      alert("Failed to update project. Please try again later.");
+    }
     // }
   };
 
@@ -78,12 +90,15 @@ export default function UpdateProject() {
           <br />
           <select
             className="w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            value={formData.userID}
+            
+            value={selectedProjectManager}
             onChange={(e) => setSelectedProjectManager(e.target.value)}
           >
-            <option value="">Select project manager</option>
+            {selectedProjectManager === "" && (
+              <option value="">Select project manager</option>
+            )}
             {projectManagers.map((manager) => (
-              <option key={manager.id} value={manager.id}>
+              <option key={manager.id} value={manager.id.toString()}>
                 {manager.firstName + " " + manager.lastName}
               </option>
             ))}
