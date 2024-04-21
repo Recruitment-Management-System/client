@@ -71,6 +71,7 @@ const Layout = () => {
           <div className="w-5/6 bg-white">
             <Routes>
               {/* authentication routes */}
+              <Route path="*" element={<Unauthorized />} />
               <Route path="/" element={<Home />} />
               <Route path="/api/register" element={<Register />} />
               <Route path="/api/login" element={<Login />} />
@@ -78,7 +79,11 @@ const Layout = () => {
                 path="/api/logout"
                 element={<Logout setIsAuthenticated={setIsAuthenticated} />}
               />
-
+              {/* Admin routes */}
+              <Route
+                path="/api/admin"
+                element={role === "ADMIN" ? <Admin /> : <Unauthorized />}
+              />
               {/* HR routes */}
 
               <Route
