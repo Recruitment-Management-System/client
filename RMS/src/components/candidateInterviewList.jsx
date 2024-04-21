@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CandidateInterviewsList = () => {
   const [interviewList, setInterviewList] = useState([]);
@@ -23,9 +24,19 @@ const CandidateInterviewsList = () => {
     //  e.preventDefault();
     try {
       await axios.put(`/candidate/${action}/${candidateID}`);
-      alert("Record updated successfully!");
+     
+      Swal.fire({
+        icon: "success",
+        title: "success",
+        text: "Record updated successfully!",
+      });
     } catch (error) {
-      alert("Failed to update. Please try again later.");
+     
+      Swal.fire({
+        icon: "error",
+        title: "error",
+        text: "Failed to update. Please try again later.",
+      });
     }
   };
 
@@ -111,14 +122,8 @@ const CandidateInterviewsList = () => {
                   {new Date(interview.interviewTime).toLocaleTimeString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <Link
-                    to={`/api/interviewer/candidate-information/${interview.interviewid}`}
-                    className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
-                  >
-                    CANDIDATES
-                  </Link>
-                </td>
-                <td>
+                  
+               
                   {interview.interviewStatus === "ENDED" &&
                   interview.interviewType === "HR" ? (
                     <Link

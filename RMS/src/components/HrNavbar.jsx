@@ -17,6 +17,9 @@ const HrNavbar = () => {
           <li className="text-xl hover:text-blue-500 duration-300">
             <Link to="/api/hr_person/all-interivews">All Interviews</Link>
           </li>
+          <li className="text-xl hover:text-blue-500 duration-300">
+            <Link to="/api/hr_person/projects">All Projects</Link>
+          </li>
         </ul>
       </div>
       <div className="absolute bottom-5 left-5">

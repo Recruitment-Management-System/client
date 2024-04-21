@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 export default function AddProject() {
   // State variables
@@ -36,10 +38,15 @@ export default function AddProject() {
         };
         await axios.post("/projects/project/save", projectData);
         // Navigate or perform further actions after successfully adding the project
-        navigate('/api/hr_person/vacancies');
+        navigate('/api/hr_person/projects');
       } catch (error) {
         console.error("Error adding project:", error);
-        alert("Failed to add project. Please try again later.");
+
+        Swal.fire({
+          icon: "error",
+          title: "error",
+          text: "Failed to update. Please try again later.",
+        });
       }
     }
   };

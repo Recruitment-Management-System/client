@@ -133,7 +133,7 @@ const Layout = () => {
               <Route
                 path="/api/hr_person/candidate-details/:candidateID"
                 element={
-                  role === "HR_PERSON" ? <CandidateDetails /> : <Unauthorized />
+                  role === "HR_PERSON"  || role === "PROJECT_MANAGER" ? <CandidateDetails /> : <Unauthorized />
                 }
               />
 
