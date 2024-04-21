@@ -29,6 +29,17 @@ export default function ProjectsHR() {
     project[0].projectName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const deleteProject = async (projectId) => {
+    try {
+      await axios.delete(`/projects/delete/${projectId}`);
+      // After successful deletion, refetch projects
+      const response = await axios.get("/projects/projectsWithUserName");
+      setProjects(response.data);
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
+  };
+
   return (
     <div className="bg-gray-200 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center mb-4">
@@ -84,8 +95,14 @@ export default function ProjectsHR() {
                     to={`/api/hr_person/updateproject/${project[0].projectID}`}
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
-                    Edit
+                  EDIT
                   </Link>
+                  <button
+                    onClick={() => deleteProject(project[0].projectID)}
+                    className="text-red-600 hover:text-red-900 font-bold"
+                  >
+                    DELETE
+                  </button>
                 </td>
               </tr>
             ))}
