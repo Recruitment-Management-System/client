@@ -186,7 +186,7 @@ export default function UpdateVacancy() {
                 <option value="">Select Status</option>
                 <option value="OPEN">OPEN</option>
                 <option value="CLOSED">CLOSED</option>
-                <option value="IN_PROGRESS">IN_PROGRESS</option>
+        
               </select>
             </div>
           </div>

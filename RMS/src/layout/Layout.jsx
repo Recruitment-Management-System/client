@@ -263,7 +263,7 @@ const Layout = () => {
               />
 
 
-              <Route path="/api/notfound" element={<NotFoundPage />} />
+              {/* <Route path="/api/notfound" element={<NotFoundPage />} /> */}
               <Route path="/api/hr_person/addproject" element={role === "HR_PERSON" ? <AddProject /> : <Unauthorized />} />
               <Route path="/api/hr_person/projects" element={role === "HR_PERSON" ? <ProjectsHR /> : <Unauthorized />} />
               <Route path="/api/hr_person/updateproject/:projectID" element={role === "HR_PERSON" ? <UpdateProject /> : <Unauthorized />} />
