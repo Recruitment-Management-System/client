@@ -36,7 +36,11 @@ const Navbar = ({ isAuthenticated }) => {
     }
   }, [isAuthenticated]);
 
-  return <div className="text-white font-bold">{navbarComponent}</div>;
+  return (
+    <div className="text-white font-bold bg-slate-800 h-full">
+      {navbarComponent}
+    </div>
+  );
 };
 
 export default Navbar;

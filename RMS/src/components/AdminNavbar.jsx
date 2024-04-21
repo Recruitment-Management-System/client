@@ -7,10 +7,10 @@ const AdminNavbar = () => {
       <div>
         <ul className="ml-5 pt-16 flex flex-col gap-5">
           <li className="text-xl hover:text-blue-500 duration-300">
-            <Link>View Vacancies</Link>
+            {/* <Link>View Vacancies</Link> */}
           </li>
           <li className="text-xl hover:text-blue-500 duration-300">
-            <Link>View Feedbacks</Link>
+            {/* <Link>View Feedbacks</Link> */}
           </li>
         </ul>
       </div>

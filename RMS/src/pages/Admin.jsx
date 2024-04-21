@@ -1,8 +1,9 @@
 import React from "react";
+import AdminUserList from "../components/AdminUserList";
 
 const Admin = () => {
   return (
-    <div className="h-screen overflow-hidden flex w-full">
+    <div className="h-screen flex w-full">
       <div
         className="w-full"
         style={{
@@ -12,10 +13,8 @@ const Admin = () => {
           // backgroundPosition: "center",
         }}
       >
-        <div className="h-full overflow-hidden">
-          <h1 className=" text-5xl font-bold text-center pt-10">
-            ADMIN DASHBOARD
-          </h1>
+        <div className="h-full">
+          <AdminUserList />
         </div>
       </div>
     </div>
