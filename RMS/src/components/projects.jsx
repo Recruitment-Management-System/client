@@ -32,7 +32,7 @@ export default function Project() {
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-center">
-          <img src={logo} alt="Logo" className="h-10 w-auto" />
+          {/* <img src={logo} alt="Logo" className="h-10 w-auto" /> */}
 
           <h2 className="text-2xl font-bold text-gray-800 ml-2">
             All Projects
