@@ -191,6 +191,7 @@ export default function AddCandidate() {
             name="cv"
             type="file"
             accept=".pdf,.doc,.docx,.txt"
+            required
             onChange={handleChange}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
