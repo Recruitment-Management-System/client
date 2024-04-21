@@ -211,9 +211,9 @@ const Layout = () => {
               />
 
               <Route path="/api/notfound" element={<NotFoundPage />} />
-              <Route path="/api/hr_person/addproject" element={<AddProject />} />
-              <Route path="/api/hr_person/projects" element={<ProjectsHR />} />
-              <Route path="/api/hr_person/updateproject/:projectID" element={<UpdateProject />} />
+              <Route path="/api/hr_person/addproject" element={role === "HR_PERSON" ? <AddProject /> : <Unauthorized />} />
+              <Route path="/api/hr_person/projects" element={role === "HR_PERSON" ? <ProjectsHR /> : <Unauthorized />} />
+              <Route path="/api/hr_person/updateproject/:projectID" element={role === "HR_PERSON" ? <UpdateProject /> : <Unauthorized />} />
             </Routes>
           </div>
         </div>
