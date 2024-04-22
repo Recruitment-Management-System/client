@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
 
 const AddFeedback = () => {
   //Edit ddata
@@ -32,11 +33,7 @@ const AddFeedback = () => {
     setFormData({ ...formData, [e.target.name]: value });
   };
 
-  useEffect(() => {
-    axios
-      .get(`/feedback/${id}`)
-      .then((resp) => setFormData({ ...resp.data[0] }));
-  }, [id]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -116,7 +113,12 @@ const AddFeedback = () => {
         `/feedback/${interviewID}/savefeedback`,
         feedbackData
       );
-      alert("Feedback sent successfully");
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Feedback Created Successfully",
+        showConfirmButton: false,
+      });
       navigate("/api/interviewer");
 
       axios.get(`/interview/updateInterviewStatus/${interviewID}`);
@@ -131,7 +133,11 @@ const AddFeedback = () => {
       });
     } catch (error) {
       console.log(error.message);
-      alert("Feedback creation failed");
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "Failed feedback submission",
+      });
     }
   };
 
@@ -159,6 +165,7 @@ const AddFeedback = () => {
                   name="feedbackdate"
                   required
                   value={formData.feedbackdate}
+                  min={new Date().toISOString().split('T')[0]}
                   onChange={handleChange}
                   type="date"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

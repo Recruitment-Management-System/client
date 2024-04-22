@@ -116,7 +116,13 @@ const Layout = () => {
               />
               <Route
                 path="/api/hr_person/secondinterviews"
-                element={<SecondInterviewList />}
+                element={
+                  role === "HR_PERSON" ? (
+                    <SecondInterviewList />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
               />
               {/* <Route
                 path="/api/hr_person/feedback/update/:feedbackhrid"
@@ -158,12 +164,24 @@ const Layout = () => {
               />
               <Route
                 path="/api/project_manager/candidatelist/:vacancyid"
-                element={<CandidateList />}
+                element={
+                  role === "PROJECT_MANAGER" ? (
+                    <CandidateList />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
               />
 
               <Route
                 path="/api/project_manager/feedback/candidates/:candidateID"
-                element={<CandidateInterviewsList />}
+                element={
+                  role === "PROJECT_MANAGER" ? (
+                    <CandidateInterviewsList />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
               />
 
               {/* <Route path="/api/admin" element={<Admin />} /> */}
@@ -189,17 +207,31 @@ const Layout = () => {
 
               <Route
                 path="/api/interviewer/feedback/savefeedback/:interviewID"
-                element={<AddFeedback />}
+                element={
+                  role === "INTERVIEWER" ? <AddFeedback /> : <Unauthorized />
+                }
               />
 
               <Route
                 path="/api/interviewer/feedback/viewfeedbackin/:interviewid"
-                element={<ViewFeedbackInterviewer />}
+                element={
+                  role === "INTERVIEWER" || role === "PROJECT_MANAGER" ? (
+                    <ViewFeedbackInterviewer />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
               />
 
               <Route
                 path="/api/interviewer/feedback/candidates/:candidateID"
-                element={<CandidateInterviewsList />}
+                element={
+                  role === "INTERVIEWER" ? (
+                    <CandidateInterviewsList />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
               />
 
               <Route
@@ -214,12 +246,20 @@ const Layout = () => {
 
               <Route
                 path="/api/interviewer/feedback/savefeedbackhr/:interviewID"
-                element={<AddFeedbackHR />}
+                element={
+                  role === "INTERVIEWER" ? <AddFeedbackHR /> : <Unauthorized />
+                }
               />
 
               <Route
                 path="/api/interviewer/feedback/viewfeedbackhr/:interviewid"
-                element={<ViewFeedbackHR />}
+                element={
+                  role === "INTERVIEWER" || role === "PROJECT_MANAGER" ? (
+                    <ViewFeedbackHR />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
               />
             </Routes>
           </div>
