@@ -38,6 +38,8 @@ import Unauthorized from "../components/Unauthorized";
 import { jwtDecode } from "jwt-decode";
 import AllInterviews from "../components/AllInterviews";
 import SecondInterviewList from "../components/SecondInterviewList";
+import AllInterviewsForHr from "../components/AllInterviewsForHr";
+import UpdateInterview from "../components/UpdateInterview";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -85,7 +87,6 @@ const Layout = () => {
                 element={role === "ADMIN" ? <Admin /> : <Unauthorized />}
               />
               {/* HR routes */}
-
               <Route
                 path="/api/hr_person"
                 element={role === "HR_PERSON" ? <HrPerson /> : <Unauthorized />}
@@ -107,24 +108,49 @@ const Layout = () => {
                 }
               />
               <Route
+                path="/api/hr_person/all-interivews"
+                element={
+                  role === "HR_PERSON" ? (
+                    <AllInterviewsForHr />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
+              />
+              <Route
                 path="/api/hr_person/add-interview/:candidateID"
-                element={<AddInterview />}
+                element={
+                  role === "HR_PERSON" ? <AddInterview /> : <Unauthorized />
+                }
               />
               <Route
                 path="/api/hr_person/candidate-details/:candidateID"
-                element={<CandidateDetails />}
+                element={
+                  role === "HR_PERSON" ? <CandidateDetails /> : <Unauthorized />
+                }
               />
               <Route
                 path="/api/hr_person/secondinterviews"
-                element={<SecondInterviewList />}
+                element={
+                  role === "HR_PERSON" ? (
+                    <SecondInterviewList />
+                  ) : (
+                    <Unauthorized />
+                  )
+                }
               />
+              <Route
+                path="/api/hr_person/update-interview/:candidateID/:interviewid"
+                element={
+                  role === "HR_PERSON" ? <UpdateInterview /> : <Unauthorized />
+                }
+              />
+
               {/* <Route
                 path="/api/hr_person/feedback/update/:feedbackhrid"
                 element={<UpdateFeedbackHR />}
               /> */}
-
               {/* PM routes */}
-
               <Route
                 path="/api/project_manager"
                 element={
@@ -135,22 +161,18 @@ const Layout = () => {
                   )
                 }
               />
-
               <Route
                 path="/api/project_manager/create-vacancy/:projectID"
                 element={<CreateVacancy />}
               />
-
               <Route
                 path="/api/project_manager/update-vacancy/:vacancyID"
                 element={<UpdateVacancy />}
               />
-
               <Route
                 path="/api/project_manager/projects/:projectId"
                 element={<VacancyTable />}
               />
-
               <Route
                 path="/api/project_manager/projects"
                 element={<Project />}
@@ -160,16 +182,13 @@ const Layout = () => {
                 path="/api/project_manager/candidatelist/:vacancyid"
                 element={<CandidateList />}
               />
-
               <Route
                 path="/api/project_manager/feedback/candidates/:candidateID"
                 element={<CandidateInterviewsList />}
               />
-
               {/* <Route path="/api/admin" element={<Admin />} /> */}
               {/* <Route path="/api/interviewer" element={<Interviewer />} />
               <Route path="/api/project_manager" element={<ProjectManager />} /> */}
-
               {/* <Route path="/api/vacancies" element={<Vacancy />} /> */}
               {/* <Route
                 path="/api/candidates/:vacancyID"
@@ -177,46 +196,37 @@ const Layout = () => {
               /> */}
               {/* <Route path="/api/add/:vacancyID" element={<AddCandidate />} /> */}
               {/* <Route path="/api/abc/:vacancyID" element={<Candidates />} /> */}
-
               {/* Interviewer routes */}
-
               <Route
                 path="/api/interviewer"
                 element={
                   role === "INTERVIEWER" ? <Interviewer /> : <Unauthorized />
                 }
               />
-
               <Route
                 path="/api/interviewer/feedback/savefeedback/:interviewID"
                 element={<AddFeedback />}
               />
-
               <Route
                 path="/api/interviewer/feedback/viewfeedbackin/:interviewid"
                 element={<ViewFeedbackInterviewer />}
               />
-
               <Route
                 path="/api/interviewer/feedback/candidates/:candidateID"
                 element={<CandidateInterviewsList />}
               />
-
               <Route
                 path="/api/interviewer/interviewlist/:userId"
                 element={<InterviewsList />}
               />
-
               <Route
                 path="/api/interviewer/candidate-information/:id"
                 element={<CandidateInfoPage />}
               />
-
               <Route
                 path="/api/interviewer/feedback/savefeedbackhr/:interviewID"
                 element={<AddFeedbackHR />}
               />
-
               <Route
                 path="/api/interviewer/feedback/viewfeedbackhr/:interviewid"
                 element={<ViewFeedbackHR />}

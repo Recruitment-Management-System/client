@@ -9,7 +9,7 @@ const AllInterviews = () => {
   const [filteredInterviews, setFilteredInterviews] = useState([]);
 
   useEffect(() => {
-    // Function to fetch interviews based on user ID
+    // Function to fetch interviews
     const fetchInterviews = async () => {
       try {
         const response = await axios.get("/interview/all_interviews");
@@ -142,10 +142,12 @@ const AllInterviews = () => {
                     {interview.interviewStatus}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {new Date(interview.interviewdate).toLocaleDateString()}
+                    {new Date(interview.interviewDate).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {new Date(interview.interviewTime).toLocaleTimeString()}
+                    {new Date(
+                      `1970-01-01T${interview.interviewTime}`
+                    ).toLocaleTimeString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
