@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import logo from "../assets/logo.jpg";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function UpdateVacancy() {
   const { vacancyID } = useParams(); // Get vacancyId from URL params
@@ -15,7 +16,6 @@ export default function UpdateVacancy() {
     status: "",
 
     reason: "",
-
   });
 
   const [notFound, setNotFound] = useState(false); // State for 404 redirect
@@ -43,6 +43,7 @@ export default function UpdateVacancy() {
       
         console.error("Error fetching vacancy data:", error);
         setNotFound(true);
+
       }
     };
 
@@ -60,20 +61,34 @@ export default function UpdateVacancy() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.openings < 1) {
+      Swal.fire({
+        icon: "error",
+        title: "Unsuccessfull!",
+        text: "Number of openings must be a positive number",
+      });
+      return;
+    }
     try {
       await axios.put(`/vacancies/update/${vacancyID}`, formData);
 
-      alert("Vacancy updated successfully!");
-      navigate("/api/project_manager/projects")
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "vacancy updated successfully!",
+      });
+
+      navigate("/api/project_manager/projects");
       // Redirect to previous page or any other page after successful update
     } catch (error) {
      
       console.error("Error updating vacancy:", error);
-      alert("Failed to update vacancy. Please try again later.");
-
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "vacancy updating error!",
+      });
     }
-
-   
   };
 
   return (
@@ -86,132 +101,125 @@ export default function UpdateVacancy() {
           </h2>
         </div>
 
-          <form className="space-y-6 md:w-2/5 w-full mx-auto" onSubmit={handleSubmit}>
-            <div>
-
-              <label
-                htmlFor="jobRole"
-                className="block text-sm font-medium leading-6 text-white"
-              >
-
-                Job Role
-              </label>
-              <div className="mt-2">
-                <input
-                  id="jobRole"
-                  name="jobRole"
-                  type="text"
-                  autoComplete="given-name"
-                  required
-                  value={formData.jobRole} // Set value from formData state
-                  onChange={handleChange}
-                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+        <form
+          className="space-y-6 md:w-2/5 w-full mx-auto"
+          onSubmit={handleSubmit}
+        >
+          <div>
+            <label
+              htmlFor="jobRole"
+              className="block text-sm font-medium leading-6 text-white"
+            >
+              Job Role
+            </label>
+            <div className="mt-2">
+              <input
+                id="jobRole"
+                name="jobRole"
+                type="text"
+                autoComplete="given-name"
+                required
+                value={formData.jobRole} // Set value from formData state
+                onChange={handleChange}
+                className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
             </div>
-            <div>
 
-              <label
-                htmlFor="jobRefCode"
-                className="block text-sm font-medium leading-6 text-white"
-              >
-
-                Job Reference Code
-              </label>
-              <div className="mt-2">
-                <input
-                  id="jobRefCode"
-                  name="jobRefCode"
-                  type="text"
-                  autoComplete="family-name"
-                  required
-                  value={formData.jobRefCode} // Set value from formData state
-                  onChange={handleChange}
-                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+          </div>
+          <div>
+            <label
+              htmlFor="jobRefCode"
+              className="block text-sm font-medium leading-6 text-white"
+            >
+              Job Reference Code
+            </label>
+            <div className="mt-2">
+              <input
+                id="jobRefCode"
+                name="jobRefCode"
+                type="text"
+                autoComplete="family-name"
+                required
+                value={formData.jobRefCode} // Set value from formData state
+                onChange={handleChange}
+                className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
             </div>
-            <div>
+          </div>
+          <div>
+            <label
+              htmlFor="openings"
+              className="block text-sm font-medium leading-6 text-white"
+            >
+              Openings
+            </label>
+            <div className="mt-2">
+              <input
+                id="openings"
+                name="openings"
+                type="text"
+                autoComplete="openings"
+                required
+                value={formData.openings} // Set value from formData state
+                onChange={handleChange}
+                className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
 
-              <label
-                htmlFor="openings"
-                className="block text-sm font-medium leading-6 text-white"
-              >
-
-                Openings
-              </label>
-              <div className="mt-2">
-                <input
-                  id="openings"
-                  name="openings"
-                  type="text"
-                  autoComplete="openings"
-                  required
-                  value={formData.openings} // Set value from formData state
-                  onChange={handleChange}
-                  min="1"
-                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
             </div>
-            <div>
-
-              <label
-                htmlFor="status"
-                className="block text-sm font-medium leading-6 text-white"
+          </div>
+          <div>
+            <label
+              htmlFor="status"
+              className="block text-sm font-medium leading-6 text-white"
+            >
+              Status
+            </label>
+            <div className="mt-2">
+              <select
+                id="status"
+                name="status"
+                required
+                value={formData.status} // Set value from formData state
+                onChange={handleChange}
+                className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-
-                Status
-              </label>
-              <div className="mt-2">
-                <select
-                  id="status"
-                  name="status"
-                  required
-                  value={formData.status} // Set value from formData state
-                  onChange={handleChange}
-                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                >
-                  <option value="">Select Status</option>
-                  <option value="OPEN">OPEN</option>
-                  <option value="CLOSED">CLOSED</option>
-                  
-                </select>
-              </div>
+                <option value="">Select Status</option>
+                <option value="OPEN">OPEN</option>
+                <option value="CLOSED">CLOSED</option>
+                <option value="IN_PROGRESS">IN_PROGRESS</option>
+              </select>
             </div>
-            <div>
-
-              <label
-                htmlFor="reason"
-                className="block text-sm font-medium leading-6 text-white"
-              >
-
-                Reason
-              </label>
-              <div className="mt-2">
-                <textarea
-                  id="reason"
-                  name="reason"
-                  type="text"
-                  autoComplete="reason"
-                  required
-                  value={formData.reason} // Set value from formData state
-                  onChange={handleChange}
-                  className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+          </div>
+          <div>
+            <label
+              htmlFor="reason"
+              className="block text-sm font-medium leading-6 text-white"
+            >
+              Reason
+            </label>
+            <div className="mt-2">
+              <textarea
+                id="reason"
+                name="reason"
+                type="text"
+                autoComplete="reason"
+                required
+                value={formData.reason} // Set value from formData state
+                onChange={handleChange}
+                className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
             </div>
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-button px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Update Vacancy
-              </button>
-            </div>
-          </form>
-        </div>
-     
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-button px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Update Vacancy
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

@@ -3,12 +3,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function AddInterview() {
+export default function UpdateInterview() {
   // State variables
   const [selectedInterviewers, setSelectedInterviewers] = useState([]);
   const [selectedInterviewer, setSelectedInterviewer] = useState("");
   const [interviewers, setInterviewers] = useState([]);
   const { candidateID } = useParams();
+  const { interviewid } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userIDs: [],
@@ -18,6 +19,48 @@ export default function AddInterview() {
       interviewTime: "",
     },
   });
+
+  //function to get interviewers in db
+  useEffect(() => {
+    const fetchDbInterviewers = async () => {
+      try {
+        const response = await axios.get(
+          `/interview/interviewer/${interviewid}`
+        );
+        setSelectedInterviewers(response.data);
+      } catch (error) {
+        console.error("Error fetching interviewers from db:", error);
+      }
+    };
+
+    fetchDbInterviewers();
+  }, [interviewid]);
+
+  useEffect(() => {
+    // Fetch existing data for interview to be updated
+    const fetchInterview = async () => {
+      try {
+        const response = await axios.get(
+          `/interview/interview-details/${interviewid}`
+        );
+        const interviewData = response.data;
+        // Set the formData state with the existing vacancy data
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          interview: {
+            ...prevFormData.interview,
+            interviewType: interviewData.interviewType,
+            interviewDate: interviewData.interviewDate,
+            interviewTime: interviewData.interviewTime,
+          },
+        }));
+      } catch (error) {
+        console.error("Error fetching interview data:", error);
+      }
+    };
+
+    fetchInterview();
+  }, [interviewid]);
 
   // Function to render selected interviewers
   const renderSelectedInterviewers = () => {
@@ -99,14 +142,22 @@ export default function AddInterview() {
 
     console.log(formData);
     try {
-      await axios.post(`/interview/interviewer/${candidateID}`, formData);
-      navigate("/api/hr_person/vacancies");
+      await axios.put(
+        `/interview/interviewer/${candidateID}/${interviewid}`,
+        formData
+      );
+      Swal.fire({
+        icon: "success",
+        title: "successfull!",
+        text: "update interview succcessfully!",
+      });
+      navigate("/api/hr_person/all-interivews");
     } catch (error) {
       console.error("Error adding interview:", error);
       Swal.fire({
         icon: "error",
         title: "Unsuccessfull!",
-        text: "Faild to create an interview",
+        text: "Faild to update interview!",
       });
     }
   };
@@ -225,7 +276,7 @@ export default function AddInterview() {
               type="submit"
               className="flex justify-center w-full px-4 py-2 text-md text-white bg-black duration-300 font-bold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Add Interview
+              Update Interview
             </button>
           </div>
         </form>
