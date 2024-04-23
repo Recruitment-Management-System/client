@@ -48,6 +48,14 @@ export default function UpdateVacancy() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.openings < 1) {
+      Swal.fire({
+        icon: "error",
+        title: "Unsuccessfull!",
+        text: "Number of openings must be a positive number",
+      });
+      return;
+    }
     try {
       await axios.put(`/vacancies/update/${vacancyID}`, formData);
 

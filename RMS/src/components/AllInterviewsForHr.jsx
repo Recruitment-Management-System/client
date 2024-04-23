@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 
-const InterviewsList = () => {
+const AllInterviewsForHr = () => {
   const [interviews, setInterviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterOption, setFilterOption] = useState("all");
   const [filteredInterviews, setFilteredInterviews] = useState([]);
 
   useEffect(() => {
-    // Function to fetch interviews based on user ID
+    // Function to fetch interviews
     const fetchInterviews = async () => {
       try {
-        // Fetch JWT token from local storage
-        const token = localStorage.getItem("token");
-
-        // Decode JWT token to extract user ID
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.id;
-
-        // Fetch interviews relevant to the user ID
-
-        const response = await axios.get(`/interview/interviews/${userId}`);
-
+        const response = await axios.get("/interview/all_interviews");
         if (response.status === 200) {
           setInterviews(response.data);
           setFilteredInterviews(response.data); // Initialize filtered interviews with all interviews
@@ -49,11 +38,6 @@ const InterviewsList = () => {
     if (option === "pending") {
       const filtered = interviews.filter(
         (interview) => interview.interviewStatus === "PENDING"
-      );
-      setFilteredInterviews(filtered);
-    } else if (option === "Happening") {
-      const filtered = interviews.filter(
-        (interview) => interview.interviewStatus === "HAPPENING"
       );
       setFilteredInterviews(filtered);
     } else if (option === "canceled") {
@@ -89,7 +73,6 @@ const InterviewsList = () => {
         >
           <option value="all">All</option>
           <option value="pending">Pending</option>
-          <option value="Happening">Happening</option>
           <option value="ended">Ended</option>
           <option value="canceled">Canceled</option>
         </select>
@@ -106,6 +89,12 @@ const InterviewsList = () => {
                   className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                 >
                   Interview ID
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                >
+                  Candidate ID
                 </th>
                 <th
                   scope="col"
@@ -146,6 +135,9 @@ const InterviewsList = () => {
                     {interview.interviewid}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
+                    {interview.candidate.candidateID}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewType}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -161,47 +153,11 @@ const InterviewsList = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
-                      to={`/api/candidate-information/${interview.interviewid}`}
+                      to={`/api/hr_person/update-interview/${interview.candidate.candidateID}/${interview.interviewid}`}
                       className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                     >
-                      CANDIDATES
+                      Edit Interview
                     </Link>
-
-                    {(interview.interviewStatus === "PENDING" ||
-                      interview.interviewStatus === "HAPPENING") &&
-                    interview.interviewType === "TECHNICAL" ? (
-                      <Link
-                        to={`/api/interviewer/feedback/savefeedback/${interview.interviewid}`}
-                        className="text-red-600 hover:text-red-900 font-bold"
-                      >
-                        ADD FEEDBACK
-                      </Link>
-                    ) : (interview.interviewStatus === "PENDING" ||
-                        interview.interviewStatus === "HAPPENING") &&
-                      interview.interviewType === "HR" ? (
-                      <Link
-                        to={`/api/interviewer/feedback/savefeedbackhr/${interview.interviewid}`}
-                        className="text-red-600 hover:text-red-900 font-bold"
-                      >
-                        ADD FEEDBACK
-                      </Link>
-                    ) : interview.interviewStatus === "ENDED" &&
-                      interview.interviewType === "HR" ? (
-                      <Link
-                        to={`/api/interviewer/feedback/viewfeedbackhr/${interview.interviewid}`}
-                        className="text-red-600 hover:text-red-900 font-bold"
-                      >
-                        VIEW FEEDBACK
-                      </Link>
-                    ) : interview.interviewStatus === "ENDED" &&
-                      interview.interviewType === "TECHNICAL" ? (
-                      <Link
-                        to={`/api/interviewer/feedback/viewfeedbackin/${interview.interviewid}`}
-                        className="text-red-600 hover:text-red-900 font-bold"
-                      >
-                        VIEW FEEDBACK
-                      </Link>
-                    ) : null}
                   </td>
                 </tr>
               ))}
@@ -213,4 +169,4 @@ const InterviewsList = () => {
   );
 };
 
-export default InterviewsList;
+export default AllInterviewsForHr;
