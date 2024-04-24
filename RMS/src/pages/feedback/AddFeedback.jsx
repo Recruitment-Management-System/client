@@ -121,7 +121,7 @@ const AddFeedback = () => {
       });
       navigate("/api/interviewer");
 
-      axios.get(`/interview/updateInterviewStatus/${interviewID}`);
+      axios.put(`/interview/updateInterviewStatus/${interviewID}`);
 
       setFormData({
         details: {
@@ -210,7 +210,6 @@ const AddFeedback = () => {
                 <input
                   id="secondinterview"
                   name="secondinterview"
-                  required
                   type="checkbox"
                   checked={formData.secondinterview}
                   onChange={handleChange}

@@ -46,6 +46,8 @@ import AllInterviews from "../components/AllInterviews";
 import SecondInterviewList from "../components/SecondInterviewList";
 import AllInterviewsForHr from "../components/AllInterviewsForHr";
 import UpdateInterview from "../components/UpdateInterview";
+import AllFeedbacksForAnInterview from "../components/AllFeedbacksForAnInterview";
+
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -256,9 +258,9 @@ const Layout = () => {
                 }
               />
               <Route
-                path="/api/interviewer/feedback/viewfeedbackin/:interviewid"
+                path="/api/interviewer/feedback/viewfeedbackin/:feedbackid"
                 element={
-                  role === "INTERVIEWER" || role === "PROJECT_MANAGER" ? (
+                  role === "INTERVIEWER" || role === "PROJECT_MANAGER" || role === "HR_PERSON" ? (
                     <ViewFeedbackInterviewer />
                   ) : (
                     <NotFoundPage />
@@ -320,7 +322,7 @@ const Layout = () => {
                   )
                 }
               />
-              {/* <Route path="*" element={<NotFoundPage />} /> */}
+              <Route path = "/api/interviewer/interviewFeedList/:interviewid" element ={<AllFeedbacksForAnInterview/>}/>
             </Routes>
           </div>
         </div>

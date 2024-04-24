@@ -116,10 +116,12 @@ const CandidateInterviewsList = () => {
                   {interview.interviewStatus}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(interview.interviewdate).toLocaleDateString()}
+                  {new Date(interview.interviewDate).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(interview.interviewTime).toLocaleTimeString()}
+                {new Date(
+                      `1970-01-01T${interview.interviewTime}`
+                    ).toLocaleTimeString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   
@@ -135,7 +137,7 @@ const CandidateInterviewsList = () => {
                   ) : interview.interviewStatus === "ENDED" &&
                     interview.interviewType === "TECHNICAL" ? (
                     <Link
-                      to={`/api/interviewer/feedback/viewfeedbackin/${interview.interviewid}`}
+                      to={`/api/interviewer/interviewFeedList/${interview.interviewid}`}
                       className="text-red-600 hover:text-red-900 font-bold"
                     >
                       VIEW FEEDBACK

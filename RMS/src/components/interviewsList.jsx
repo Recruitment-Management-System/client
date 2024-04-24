@@ -196,10 +196,10 @@ const InterviewsList = () => {
                     ) : interview.interviewStatus === "ENDED" &&
                       interview.interviewType === "TECHNICAL" ? (
                       <Link
-                        to={`/api/interviewer/feedback/viewfeedbackin/${interview.interviewid}`}
+                        to={`/api/interviewer/interviewFeedList/${interview.interviewid}`}
                         className="text-red-600 hover:text-red-900 font-bold"
                       >
-                        VIEW FEEDBACK
+                        VIEW FEEDBACKS
                       </Link>
                     ) : null}
                   </td>
