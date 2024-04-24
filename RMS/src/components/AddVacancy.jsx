@@ -138,4 +138,5 @@ export default function CreateVacancy(props) {
       </div>
     </div>
   );
+
 }

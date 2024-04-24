@@ -36,10 +36,17 @@ import InterviewsList from "../components/interviewsList";
 import CandidateInfoPage from "../components/candidateInformation";
 import Unauthorized from "../components/Unauthorized";
 import { jwtDecode } from "jwt-decode";
+
+import NotFoundPage from "../components/NotFoundPage";
+import AddProject from "../components/AddProject";
+import ProjectsHR from "../components/ProjectsHR";
+import UpdateProject from "../components/UpdateProject";
+
 import AllInterviews from "../components/AllInterviews";
 import SecondInterviewList from "../components/SecondInterviewList";
 import AllInterviewsForHr from "../components/AllInterviewsForHr";
 import UpdateInterview from "../components/UpdateInterview";
+
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 axios.defaults.withCredentials = true;
@@ -129,6 +136,8 @@ const Layout = () => {
                   role === "HR_PERSON" ? <CandidateDetails /> : <Unauthorized />
                 }
               />
+
+
               <Route
                 path="/api/hr_person/secondinterviews"
                 element={
@@ -150,6 +159,7 @@ const Layout = () => {
                 path="/api/hr_person/feedback/update/:feedbackhrid"
                 element={<UpdateFeedbackHR />}
               /> */}
+
               {/* PM routes */}
               <Route
                 path="/api/project_manager"
@@ -188,6 +198,7 @@ const Layout = () => {
                   )
                 }
               />
+
               <Route
                 path="/api/project_manager/feedback/candidates/:candidateID"
                 element={
@@ -198,6 +209,7 @@ const Layout = () => {
                   )
                 }
               />
+
               {/* <Route path="/api/admin" element={<Admin />} /> */}
               {/* <Route path="/api/interviewer" element={<Interviewer />} />
               <Route path="/api/project_manager" element={<ProjectManager />} /> */}
@@ -249,6 +261,13 @@ const Layout = () => {
                 path="/api/interviewer/candidate-information/:id"
                 element={<CandidateInfoPage />}
               />
+
+
+              <Route path="/api/notfound" element={<NotFoundPage />} />
+              <Route path="/api/hr_person/addproject" element={role === "HR_PERSON" ? <AddProject /> : <Unauthorized />} />
+              <Route path="/api/hr_person/projects" element={role === "HR_PERSON" ? <ProjectsHR /> : <Unauthorized />} />
+              <Route path="/api/hr_person/updateproject/:projectID" element={role === "HR_PERSON" ? <UpdateProject /> : <Unauthorized />} />
+
               <Route
                 path="/api/interviewer/feedback/savefeedbackhr/:interviewID"
                 element={
@@ -265,6 +284,7 @@ const Layout = () => {
                   )
                 }
               />
+
             </Routes>
           </div>
         </div>

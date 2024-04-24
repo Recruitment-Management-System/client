@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.jpg";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import axios from "axios"; // Import Axios for making HTTP requests
+import { jwtDecode } from "jwt-decode";
 
 export default function Project() {
   const [projects, setProjects] = useState([]);
@@ -11,7 +12,12 @@ export default function Project() {
     // Function to fetch all projects from the backend
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("/projects"); // Adjust the API endpoint according to your backend
+        const token = localStorage.getItem("token");
+
+        // Decode JWT token to extract user ID
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.id;
+        const response = await axios.get(`/projects/project/${userId}`); // Adjust the API endpoint according to your backend
 
         setProjects(response.data); // Set the retrieved projects to the state
       } catch (error) {
