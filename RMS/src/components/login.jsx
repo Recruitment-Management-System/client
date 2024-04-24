@@ -30,14 +30,14 @@ export default function Example() {
       }
     }
 
-    // if (formData.password.length < 8) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Invalid Password",
-    //     text: "Password must be at least 8 characters long.",
-    //   });
-    //   return;
-    // }
+    if (formData.password.length < 8) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Password",
+        text: "Password must be at least 8 characters long.",
+      });
+      return;
+    }
 
     if (!formData.username.endsWith("@mitrai.com")) {
       Swal.fire({
