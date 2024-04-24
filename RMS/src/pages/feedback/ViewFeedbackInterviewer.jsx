@@ -5,11 +5,11 @@ import axios from "axios";
 
 const ViewFeedbackInterviewer = () => {
   const [feedback, setFeedback] = useState(null);
-  const { interviewid } = useParams();
+  const { feedbackid } = useParams();
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`/feedback/interview/${interviewid}`);
+      const response = await axios.get(`/feedback/all/${feedbackid}`);
       setFeedback(response.data);
     } catch (error) {
       console.error("Error fetching feedback:", error);

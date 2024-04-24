@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 export default function UpdateProject() {
   const { projectID } = useParams();
@@ -69,11 +71,21 @@ export default function UpdateProject() {
       };
 
       await axios.put(`/projects/update/${projectID}`, projectData);
+      Swal.fire({
+        icon: "success",
+        title: "SuccessFully!",
+        text: "Project Updated Successfully!",
+      });
       navigate("/api/hr_person/projects");
       setSelectedProjectManager("");
     } catch (error) {
       console.error("Error updating project:", error);
-      alert("Failed to update project. Please try again later.");
+
+      Swal.fire({
+        icon: "error",
+        title: "unsuccessFully!",
+        text: "Failed to update project. Please try again later!",
+      });
     }
     // }
   };

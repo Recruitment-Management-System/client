@@ -29,26 +29,6 @@ function CandidateList() {
         <h2 className="text-2xl font-semibold text-gray-800">
           Candidates for vacancy {vacancyid}
         </h2>
-        <div className="flex items-center space-x-4">
-          {/* Search input */}
-          <input
-            type="text"
-            // value={searchTerm}
-            // onChange={handleSearchChange}
-            placeholder="Search job role..."
-            className="bg-white border border-gray-300 px-4 py-2 rounded-l-md rounded-r-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          {/* Filter dropdown menu */}
-          <select
-            // value={filterOption}
-            // onChange={handleFilterChange}
-            className="bg-white border border-gray-300 px-4 py-2 rounded-r-md rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
-            <option value="all">All</option>
-            <option value="open">Open</option>
-            <option value="closed">Closed</option>
-          </select>
-        </div>
       </div>
       <div className="shadow w-full border-b border-gray-200 sm:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
@@ -129,9 +109,9 @@ function CandidateList() {
                     to={`/api/project_manager/feedback/candidates/${candidate.candidateID}`}
                     // to={`/api/interviewer/feedback/candidates/${candidate.candidateID}`}
 
-                    className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
+                    className="text-red-600 hover:text-red-900 mr-4 font-bold"
                   >
-                    View Feedbacks
+                    VIEW FEEDBACKS
                   </Link>
                 </td>
               </tr>

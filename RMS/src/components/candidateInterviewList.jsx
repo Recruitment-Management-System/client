@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CandidateInterviewsList = () => {
   const [interviewList, setInterviewList] = useState([]);
@@ -23,9 +24,19 @@ const CandidateInterviewsList = () => {
     //  e.preventDefault();
     try {
       await axios.put(`/candidate/${action}/${candidateID}`);
-      alert("Record updated successfully!");
+     
+      Swal.fire({
+        icon: "success",
+        title: "success",
+        text: "Record updated successfully!",
+      });
     } catch (error) {
-      alert("Failed to update. Please try again later.");
+     
+      Swal.fire({
+        icon: "error",
+        title: "error",
+        text: "Failed to update. Please try again later.",
+      });
     }
   };
 
@@ -105,20 +116,16 @@ const CandidateInterviewsList = () => {
                   {interview.interviewStatus}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(interview.interviewdate).toLocaleDateString()}
+                  {new Date(interview.interviewDate).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(interview.interviewTime).toLocaleTimeString()}
+                {new Date(
+                      `1970-01-01T${interview.interviewTime}`
+                    ).toLocaleTimeString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <Link
-                    to={`/api/interviewer/candidate-information/${interview.interviewid}`}
-                    className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
-                  >
-                    CANDIDATES
-                  </Link>
-                </td>
-                <td>
+                  
+               
                   {interview.interviewStatus === "ENDED" &&
                   interview.interviewType === "HR" ? (
                     <Link
@@ -130,7 +137,7 @@ const CandidateInterviewsList = () => {
                   ) : interview.interviewStatus === "ENDED" &&
                     interview.interviewType === "TECHNICAL" ? (
                     <Link
-                      to={`/api/interviewer/feedback/viewfeedbackin/${interview.interviewid}`}
+                      to={`/api/interviewer/interviewFeedList/${interview.interviewid}`}
                       className="text-red-600 hover:text-red-900 font-bold"
                     >
                       VIEW FEEDBACK

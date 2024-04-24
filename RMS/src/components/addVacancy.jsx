@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import logo from "../assets/logo.jpg";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // Import useParams hook
+import Swal from "sweetalert2";
+
 
 export default function CreateVacancy(props) {
   const { projectID } = useParams(); // Use useParams to access route parameter
@@ -25,11 +27,20 @@ export default function CreateVacancy(props) {
     try {
       await axios.post(`/vacancies/${projectID}/add`, formData);
       // alert('Vacancy created successfully!');
+      Swal.fire({
+        icon: "success",
+        title: "success",
+        text: "Vacancy created successfully!",
+      });
       // Redirect to project page or any other page after successful submission
       navigate(`/projects/${projectID}`);
     } catch (error) {
       console.error("Error creating vacancy:", error);
-      alert("Failed to create vacancy. Please try again later.");
+      Swal.fire({
+        icon: "error",
+        title: "error",
+        text: "Failed to create vacancy. Please try again later",
+      });
     }
   };
 

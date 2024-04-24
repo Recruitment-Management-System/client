@@ -8,6 +8,7 @@ function Vacancy() {
   const [filteredVacancies, setFilteredVacancies] = useState([]);
   const [filterOption, setFilterOption] = useState("all"); // Default filter option
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [tableSize, setTableSize] = useState("full"); // State for table size
 
   useEffect(() => {
     const fetchVacancies = async () => {
@@ -55,6 +56,8 @@ function Vacancy() {
     setFilteredVacancies(filtered);
   }, [searchTerm, vacancies]);
 
+
+
   return (
     <div className="bg-gray-200 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center mb-4">
@@ -78,13 +81,14 @@ function Vacancy() {
             <option value="open">Open</option>
             <option value="closed">Closed</option>
           </select>
+        
         </div>
       </div>
-      <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
+      <div className={`shadow overflow-x-auto border-b border-gray-200 sm:rounded-lg ${tableSize === "compact" ? "max-w-xs" : ""}`}>
+        <table className={`min-w-full divide-y divide-gray-200 ${tableSize === "compact" ? "table-auto" : ""}`}>
+          {/* Table headers */}
           <thead className="bg-gray-800">
             <tr>
-              {/* Table headers */}
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
@@ -133,7 +137,6 @@ function Vacancy() {
             {/* Render filtered vacancies */}
             {filteredVacancies.map((vacancy) => (
               <tr key={vacancy.vacancyID}>
-                {/* Table data */}
                 <td className="px-6 py-4 whitespace-nowrap">
                   {vacancy.vacancyID}
                 </td>
@@ -161,7 +164,7 @@ function Vacancy() {
                   </Link>
 
                   <Link
-                    className="text-red-600 hover:text-red-900 font-bold"
+                    className="text-red-600 hover:text-red-900 font-bold "
                     to={`/api/hr_person/add/${vacancy.vacancyID}`}
                   >
                     ADD CANDIDATE
