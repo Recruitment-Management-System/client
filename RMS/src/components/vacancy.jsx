@@ -89,12 +89,7 @@ function Vacancy() {
           {/* Table headers */}
           <thead className="bg-gray-800">
             <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-              >
-                Vacancy ID
-              </th>
+              
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
@@ -137,9 +132,7 @@ function Vacancy() {
             {/* Render filtered vacancies */}
             {filteredVacancies.map((vacancy) => (
               <tr key={vacancy.vacancyID}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {vacancy.vacancyID}
-                </td>
+                
                 <td className="px-6 py-4 whitespace-nowrap">
                   {vacancy.jobRole}
                 </td>

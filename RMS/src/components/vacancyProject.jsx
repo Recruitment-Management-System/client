@@ -90,12 +90,6 @@ function VacancyTable() {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
               >
-                Vacancy ID
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-              >
                 Job Role
               </th>
               <th
@@ -133,11 +127,6 @@ function VacancyTable() {
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredVacancies.map((vacancy) => (
               <tr key={vacancy.vacancyID}>
-                <Link to={`/api/project_manager/candidatelist/${vacancy.vacancyID}`}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {vacancy.vacancyID}
-                  </td>
-                </Link>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {vacancy.jobRole}
                 </td>
@@ -159,6 +148,12 @@ function VacancyTable() {
                     className="text-indigo-600 hover:text-indigo-900 mr-4 font-bold"
                   >
                     EDIT
+                  </Link>
+                  <Link
+                    to={`/api/project_manager/candidatelist/${vacancy.vacancyID}`}
+                    className="text-red-600 hover:text-indigo-900 mr-4 font-bold"
+                  >
+                    VIEW VACANCY
                   </Link>
                 </td>
               </tr>

@@ -64,9 +64,7 @@ export default function ProjectsHR() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-800">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Project ID
-              </th>
+              
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Project Name
               </th>
@@ -86,7 +84,7 @@ export default function ProjectsHR() {
             {filteredProjects.map((project) => (
               <tr key={project[0].projectID}>
                 {/* Table data */}
-                <td className="px-6 py-4 whitespace-nowrap">{project[0].projectID}</td>
+                
                 <td className="px-6 py-4 whitespace-nowrap">{project[0].projectName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{project[0].projectCode}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{project[1]}</td>

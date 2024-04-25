@@ -57,20 +57,15 @@ const CandidateInterviewsList = () => {
         </button>
       </div>
 
-      <h2 className="text-2xl font-semibold text-gray-800 text-center">
-        Interviews List
+      <h2 className="text-2xl font-semibold text-gray-800">
+        Interviews List of Candidate : {candidateID}
       </h2>
 
       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-800">
             <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-              >
-                Interview ID
-              </th>
+              
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
@@ -106,9 +101,7 @@ const CandidateInterviewsList = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {interviewList.map((interview) => (
               <tr key={interview.interviewid}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {interview.interviewid}
-                </td>
+               
                 <td className="px-6 py-4 whitespace-nowrap">
                   {interview.interviewType}
                 </td>

@@ -127,7 +127,7 @@ const AddFeedbackHR = () => {
             <input
               id="salaryexpectation"
               name="salaryexpectation"
-              type="text"
+              type="number"
               value={formData.salaryexpectation}
               required
               onChange={handleChange}

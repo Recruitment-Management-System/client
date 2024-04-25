@@ -88,12 +88,6 @@ const AllInterviewsForHr = () => {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                 >
-                  Interview ID
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                >
                   Candidate ID
                 </th>
                 <th
@@ -131,9 +125,6 @@ const AllInterviewsForHr = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredInterviews.map((interview) => (
                 <tr key={interview.interviewid}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {interview.interviewid}
-                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.candidate.candidateID}
                   </td>

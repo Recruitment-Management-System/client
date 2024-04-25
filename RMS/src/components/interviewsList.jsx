@@ -101,12 +101,7 @@ const InterviewsList = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-800">
               <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                >
-                  Interview ID
-                </th>
+                
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
@@ -142,9 +137,7 @@ const InterviewsList = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredInterviews.map((interview) => (
                 <tr key={interview.interviewid}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {interview.interviewid}
-                  </td>
+                  
                   <td className="px-6 py-4 whitespace-nowrap">
                     {interview.interviewType}
                   </td>

@@ -51,30 +51,46 @@ const CandidateDetails = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">
-        {candidate.firstname} {candidate.lastname}
-      </h1>
-      <p>
-        <strong>NIC:</strong> {candidate.nic}
-      </p>
-      <p>
-        <strong>Years of Experience:</strong> {candidate.experience}
-      </p>
-      <p>
-        <strong>Qualification:</strong> {candidate.qualification}
-      </p>
-      <p>
-        <strong>Description:</strong> {candidate.description}
-      </p>
-
-      {cvBlob && (
-        <div>
-          <p>
-            <strong>CV : </strong><button onClick={downloadCV}>Download CV</button>
-          </p>
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-white shadow-md rounded-md overflow-hidden max-w-md w-full">
+        <div className="px-6 py-4 bg-gray-800 text-white">
+          <h2 className="text-xl font-semibold">Candidate Information</h2>
         </div>
-      )}
+        <div className="p-6">
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">
+              Name:
+            </label>
+            <p className="text-gray-900">{`${candidate?.firstname} ${candidate?.lastname}`}</p>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">
+              NIC:
+            </label>
+            <p className="text-gray-900">{candidate?.nic}</p>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">
+              Experience:
+            </label>
+            <p className="text-gray-900">{candidate?.experience} years</p>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">
+              Qualifications:
+            </label>
+            <p className="text-gray-900">{candidate?.qualification}</p>
+          </div>
+          {cvBlob && (
+            <div>
+              <p>
+                <strong>CV : </strong>
+                <button className = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={downloadCV}>Download CV</button>
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
