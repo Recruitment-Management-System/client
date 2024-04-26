@@ -76,11 +76,22 @@ export default function Example() {
       });
     } catch (error) {
       console.error("Error:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "Failed login to account.",
-      });
+      if (
+        error.response &&
+        error.response.data === "User is still not active"
+      ) {
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: "User is still not active",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: `Failed login to account. username or password incorrect`,
+        });
+      }
     }
   };
 

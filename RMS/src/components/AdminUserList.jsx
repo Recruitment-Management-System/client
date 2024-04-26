@@ -83,7 +83,7 @@ function AdminUserList() {
             type="text"
             value={searchTerm}
             onChange={handleSearchChange}
-            placeholder="Search first name..."
+            placeholder="Search name..."
             className="bg-white border border-gray-300 px-4 py-2 rounded-l-md rounded-r-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
           {/* Filter dropdown menu */}
@@ -92,6 +92,7 @@ function AdminUserList() {
             onChange={handleFilterChange}
             className="bg-white border border-gray-300 px-4 py-2 rounded-r-md rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
+            <option value="">All</option>
             <option value="0">Inactive</option>
             <option value="1">Active</option>
           </select>
@@ -106,7 +107,7 @@ function AdminUserList() {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
               >
-                User ID
+                User Name
               </th>
               <th
                 scope="col"
@@ -132,12 +133,7 @@ function AdminUserList() {
               >
                 Position
               </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-              >
-                Active/Inactive
-              </th>
+
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
@@ -151,14 +147,13 @@ function AdminUserList() {
             {filteredUsers.map((user) => (
               <tr key={user.id}>
                 {/* Table data */}
-                <td className="px-6 py-4 whitespace-nowrap">{user.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {user.firstName}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.lastName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.position}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.active}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   {user.active === 0 ? (
                     <Link
